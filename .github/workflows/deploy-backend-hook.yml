@@ -1,0 +1,28 @@
+name: Trigger Backend Deploy Hook
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - backend/**
+      - .github/workflows/deploy-backend-hook.yml
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    name: Call hosting deploy hook
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Trigger deploy hook
+        env:
+          DEPLOY_HOOK_URL: ${{ secrets.BACKEND_DEPLOY_HOOK_URL }}
+        run: |
+          if [ -z "$DEPLOY_HOOK_URL" ]; then
+            echo "BACKEND_DEPLOY_HOOK_URL is not configured. Skipping backend deploy."
+            exit 0
+          fi
+
+          curl -fsS -X POST "$DEPLOY_HOOK_URL"
+          echo "Backend deploy hook triggered."

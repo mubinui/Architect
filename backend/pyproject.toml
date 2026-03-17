@@ -1,0 +1,24 @@
+[project]
+name = "architect-backend"
+version = "0.1.0"
+description = "Architect - AI-powered home interior design backend"
+readme = "README.md"
+authors = [
+    { name = "mubinuic", email = "uic.mubin@gmail.com" }
+]
+requires-python = ">=3.13"
+dependencies = [
+    "fastapi>=0.135.1",
+    "httpx>=0.28.1",
+    "pydantic>=2.12.5",
+    "pydantic-settings>=2.13.1",
+    "python-dotenv>=1.2.2",
+    "uvicorn>=0.42.0",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"

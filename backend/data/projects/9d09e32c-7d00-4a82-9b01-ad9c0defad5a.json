@@ -1,0 +1,37 @@
+{
+  "id": "9d09e32c-7d00-4a82-9b01-ad9c0defad5a",
+  "name": "my appartement ",
+  "created_at": "2026-03-17T14:11:55.237302Z",
+  "updated_at": "2026-03-17T14:12:00.924112Z",
+  "design_context": {
+    "style": "modern",
+    "primary_colors": [
+      "baige"
+    ],
+    "accent_colors": [
+      "baige contrast"
+    ],
+    "material_palette": [],
+    "lighting_mood": "",
+    "texture_preferences": [
+      "matte"
+    ],
+    "overall_description": "A modern cozy apartment "
+  },
+  "rooms": [
+    {
+      "id": "d5b39ae5-565e-4711-bc0d-32cfd8e43fee",
+      "name": "Master Bedroom",
+      "room_type": "bedroom",
+      "dimensions": {
+        "width": 4.0,
+        "height": 3.0,
+        "length": 5.0
+      },
+      "color_preferences": [],
+      "furniture_preferences": [],
+      "notes": ""
+    }
+  ],
+  "results": {}
+}
