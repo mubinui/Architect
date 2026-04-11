@@ -4,14 +4,16 @@ import { FormsModule } from '@angular/forms';
 import { ProjectStore } from '../../core/store/project.store';
 import { getFurnitureForRoom, FurnitureItem } from '../../core/data/furniture-presets';
 import { WebScannerComponent } from '../../shared/components/web-scanner.component';
+import { FloorplanEditorComponent } from './floorplan-editor.component';
 import { CatalogService } from '../../core/services/catalog.service';
 import { CatalogItem } from '../../core/models/catalog.model';
+import { BlueprintElement } from '../../core/models/room.model';
 import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-room-detail',
   standalone: true,
-  imports: [RouterLink, FormsModule, WebScannerComponent],
+  imports: [RouterLink, FormsModule, WebScannerComponent, FloorplanEditorComponent],
   template: `
     <div class="detail">
       @if (!room()) {
@@ -36,6 +38,16 @@ import { firstValueFrom } from 'rxjs';
         </div>
 
         <!-- Layout -->
+        
+        <div class="card" style="margin-bottom: 24px; padding: 24px;">
+          <h3 class="section-title">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" style="flex-shrink:0"><rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M7 3v18M17 3v18M3 7h18M3 17h18" stroke="currentColor" stroke-width="1"/></svg>
+            2D Architectural Blueprint Mapping
+          </h3>
+          <p style="font-size:13px; color:#5f6368; margin-bottom:16px;">Map your desired spatial geometry precisely to instruct Gemini exactly where things should be anchored in 3D.</p>
+          <app-floorplan-editor [spec]="room()!" (save)="onFloorplanSave($event)"></app-floorplan-editor>
+        </div>
+
         <div class="detail-layout">
 
           <!-- Left: image -->
@@ -821,5 +833,18 @@ export class RoomDetailComponent implements OnInit {
 
   removeRefImage(index: number) {
     this.referenceImages = this.referenceImages.filter((_, i) => i !== index);
+  }
+
+  async onFloorplanSave(event: {elements: BlueprintElement[], image: string}) {
+    const room = this.room();
+    if (!room) return;
+    
+    // Pass raw elements and the synthesized image footprint up to the state
+    await this.store.updateRoom(this.roomId, {
+      ...room,
+      blueprint_elements: event.elements,
+      blueprint_image: event.image
+    });
+    alert('Floorplan architecture mapped successfully! Click Regenerate to visualize the 3D room.');
   }
 }

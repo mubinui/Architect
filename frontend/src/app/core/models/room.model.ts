@@ -18,6 +18,17 @@ export interface Dimensions {
   length: number;
 }
 
+export interface BlueprintElement {
+  id: string;
+  type: string;
+  label: string;
+  x: number;
+  y: number;
+  w: number;
+  h: number;
+  r: number;
+}
+
 export interface RoomSpec {
   id: string;
   name: string;
@@ -26,6 +37,8 @@ export interface RoomSpec {
   color_preferences: string[];
   furniture_preferences: string[];
   selected_catalog_items: string[];
+  blueprint_elements?: BlueprintElement[];
+  blueprint_image?: string;
   notes: string;
 }
 

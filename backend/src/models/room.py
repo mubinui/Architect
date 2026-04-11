@@ -1,6 +1,7 @@
 from pydantic import BaseModel, Field
 from enum import Enum
 import uuid
+from typing import Optional, List
 
 
 class RoomType(str, Enum):
@@ -24,6 +25,16 @@ class Dimensions(BaseModel):
     length: float = Field(gt=0, description="Length in feet")
 
 
+class BlueprintElement(BaseModel):
+    id: str
+    type: str
+    label: str
+    x: float
+    y: float
+    w: float
+    h: float
+    r: float
+
 class RoomSpec(BaseModel):
     id: str = Field(default_factory=lambda: str(uuid.uuid4()))
     name: str
@@ -32,6 +43,8 @@ class RoomSpec(BaseModel):
     color_preferences: list[str] = []
     furniture_preferences: list[str] = []
     selected_catalog_items: list[str] = []
+    blueprint_elements: Optional[List[BlueprintElement]] = []
+    blueprint_image: Optional[str] = None
     notes: str = ""
 
 

@@ -29,11 +29,17 @@ def _get_catalog_descriptions(room, catalog: CatalogStore) -> list[str] | None:
 
 
 def _get_reference_images(room, catalog: CatalogStore) -> list[str] | None:
-    """Collect reference images from a room's selected catalog items."""
-    if not room.selected_catalog_items:
-        return None
-    items = catalog.get_items_by_ids(room.selected_catalog_items)
-    images = [item.image_base64 for item in items if item.image_base64]
+    """Collect reference images from a room's selected catalog items and floorplans."""
+    images = []
+    
+    # 1. Provide the structural blueprint image first if it exists
+    if getattr(room, 'blueprint_image', None):
+        images.append(room.blueprint_image)
+        
+    if room.selected_catalog_items:
+        items = catalog.get_items_by_ids(room.selected_catalog_items)
+        images.extend([item.image_base64 for item in items if item.image_base64])
+        
     return images if images else None
 
 
