@@ -132,6 +132,25 @@ type ResizeHandle = 'nw' | 'n' | 'ne' | 'e' | 'se' | 's' | 'sw' | 'w';
       background: #f8f9fa;
     }
 
+    @media (max-width: 768px) {
+      .editor-wrap {
+        flex-direction: column;
+        height: auto;
+        min-height: 0;
+      }
+      :host ::ng-deep .toolbar {
+        width: 100% !important;
+        min-width: 0 !important;
+        border-right: none !important;
+        border-bottom: 1px solid #dadce0;
+        max-height: 45vh;
+        overflow-y: auto;
+      }
+      .viewport {
+        min-height: 50vh;
+      }
+    }
+
     /* ── Viewport ── */
     .viewport {
       flex: 1;

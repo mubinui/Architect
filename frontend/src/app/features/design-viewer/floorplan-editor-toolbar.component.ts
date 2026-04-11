@@ -95,10 +95,7 @@ export interface ToolDragData {
             }
           </div>
         }
-      </div>
 
-      <!-- Bottom controls -->
-      <div class="bottom-panel">
         <!-- Color Palette -->
         <div class="section">
           <button class="section-header" (click)="toggleSection('palette')">
@@ -127,7 +124,10 @@ export interface ToolDragData {
             </div>
           }
         </div>
+      </div>
 
+      <!-- Bottom controls -->
+      <div class="bottom-panel">
         <!-- View controls -->
         <div class="view-controls">
           <button class="ctrl-btn" (click)="snapToggle.emit()" [class.ctrl-btn--active]="snapEnabled()">
@@ -164,6 +164,7 @@ export interface ToolDragData {
   styles: [`
     .toolbar {
       width: 230px;
+      min-width: 230px;
       background: #fff;
       border-right: 1px solid #dadce0;
       display: flex;
@@ -277,6 +278,7 @@ export interface ToolDragData {
     .bottom-panel {
       border-top: 1px solid #e8eaed;
       padding: 8px 12px 12px;
+      flex-shrink: 0;
     }
 
     .palette-list {
@@ -284,8 +286,6 @@ export interface ToolDragData {
       flex-direction: column;
       gap: 3px;
       padding-bottom: 8px;
-      max-height: 140px;
-      overflow-y: auto;
     }
 
     .palette-row {

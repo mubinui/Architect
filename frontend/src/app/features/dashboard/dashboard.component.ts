@@ -96,6 +96,9 @@ import { ProjectSummary } from '../../core/models';
     </div>
   `,
   styles: `
+    .page {
+      padding: 32px 0;
+    }
     .page-header {
       margin-bottom: 28px;
     }
@@ -140,8 +143,9 @@ import { ProjectSummary } from '../../core/models';
     }
     .projects-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 16px;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+      max-width: 1600px;
     }
     .project-card {
       cursor: pointer;
@@ -215,6 +219,10 @@ import { ProjectSummary } from '../../core/models';
       font-size: 14px;
       font-weight: 500;
       color: #1a73e8;
+    }
+
+    @media (max-width: 640px) {
+      .projects-grid { grid-template-columns: 1fr; }
     }
   `,
 })

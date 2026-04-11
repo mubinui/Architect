@@ -161,6 +161,11 @@ html, body {
   }
 }
 
+// ─── Full-width override for room editor page (no side padding) ─────────────
+.app-body:has(app-room-detail) {
+  padding: 0 !important;
+}
+
 // ─── Divider ─────────────────────────────────────────────────────────────────
 .divider {
   height: 1px;

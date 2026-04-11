@@ -10,630 +10,770 @@ import { CatalogItem } from '../../core/models/catalog.model';
 import { BlueprintElement } from '../../core/models/room.model';
 import { firstValueFrom } from 'rxjs';
 
+type MainTab = 'blueprint' | 'design';
+type SideSection = 'furniture' | 'references' | 'details';
+
 @Component({
   selector: 'app-room-detail',
   standalone: true,
   imports: [RouterLink, FormsModule, WebScannerComponent, FloorplanEditorComponent],
   template: `
-    <div class="detail">
+    <div class="page">
       @if (!room()) {
-        <div class="state-center"><div class="spinner"></div></div>
+        <div class="loader"><div class="spinner"></div></div>
       } @else {
-        <!-- Header -->
-        <div class="detail-header">
-          <a [routerLink]="['/project', projectId]" class="back-link">
+
+        <!-- ── Topbar ── -->
+        <header class="topbar">
+          <a [routerLink]="['/project', projectId]" class="topbar-back" title="Back to project">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-              <path d="M19 12H5M5 12L12 19M5 12L12 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
-            Back to project
           </a>
-          <div class="header-main">
-            <h1 class="detail-title">{{ room()!.name }}</h1>
-            <div class="header-meta">
-              <span class="badge badge--gray">{{ room()!.room_type.replace('_', ' ') }}</span>
-              <span class="meta-sep">·</span>
-              <span class="meta-dim">{{ room()!.dimensions.width }} ft × {{ room()!.dimensions.length }} ft × {{ room()!.dimensions.height }} ft ceiling</span>
-            </div>
+          <h1 class="topbar-name">{{ room()!.name }}</h1>
+          <span class="topbar-type">{{ room()!.room_type.replace('_', ' ') }}</span>
+          <span class="topbar-dims">{{ room()!.dimensions.width }}' &times; {{ room()!.dimensions.length }}' &times; {{ room()!.dimensions.height }}'</span>
+
+          <!-- 2 rounded tabs in the center -->
+          <div class="topbar-spacer"></div>
+          <div class="tab-group">
+            <button
+              class="tab"
+              [class.tab--active]="activeTab() === 'blueprint'"
+              (click)="activeTab.set('blueprint')">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="7" height="7" stroke="currentColor" stroke-width="1.5"/><rect x="14" y="3" width="7" height="7" stroke="currentColor" stroke-width="1.5"/><rect x="3" y="14" width="7" height="7" stroke="currentColor" stroke-width="1.5"/><rect x="14" y="14" width="7" height="7" stroke="currentColor" stroke-width="1.5"/></svg>
+              Blueprint
+            </button>
+            <button
+              class="tab"
+              [class.tab--active]="activeTab() === 'design'"
+              (click)="activeTab.set('design')">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M3 15L8 10L13 15" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M14 13L17 10L21 14" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><circle cx="8.5" cy="8.5" r="1.5" fill="currentColor"/></svg>
+              Design
+            </button>
           </div>
-        </div>
+          <div class="topbar-spacer"></div>
 
-        <!-- Layout -->
-        
-        <div class="card" style="margin-bottom: 24px; padding: 24px;">
-          <h3 class="section-title">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" style="flex-shrink:0"><rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M7 3v18M17 3v18M3 7h18M3 17h18" stroke="currentColor" stroke-width="1"/></svg>
-            2D Architectural Blueprint Mapping
-          </h3>
-          <p style="font-size:13px; color:#5f6368; margin-bottom:16px;">Map your desired spatial geometry precisely to instruct Gemini exactly where things should be anchored in 3D.</p>
-          <app-floorplan-editor [spec]="room()!" (save)="onFloorplanSave($event)"></app-floorplan-editor>
-        </div>
-
-        <div class="detail-layout">
-
-          <!-- Left: image -->
-          <div class="image-col">
-            <div class="image-wrap">
-              @if (status() === 'generating') {
-                <div class="image-state">
-                  <div class="spinner"></div>
-                  <span>Generating 3D design…</span>
-                </div>
-              } @else if (result()) {
-                <img [src]="result()!.image_base64" [alt]="room()!.name" class="room-img" />
-              } @else {
-                <div class="image-state image-state--empty">
-                  <svg width="40" height="40" viewBox="0 0 24 24" fill="none">
-                    <rect x="3" y="3" width="18" height="18" rx="2" stroke="#dadce0" stroke-width="1.25"/>
-                    <path d="M3 16L8 11L11 14L15 9L21 16" stroke="#dadce0" stroke-width="1.25" stroke-linejoin="round"/>
-                    <circle cx="8.5" cy="8.5" r="1.5" fill="#dadce0"/>
-                  </svg>
-                  <span>No image generated yet</span>
-                  <button class="btn btn-primary" (click)="regen()">Generate 3D Design</button>
-                </div>
-              }
-            </div>
-
-            <!-- Regen button below image -->
-            @if (result()) {
-              <div class="image-actions">
-                <button class="btn btn-secondary" [disabled]="status() === 'generating'" (click)="regen()">
-                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none">
-                    <path d="M1 4V10H7" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M3.51 15C4.15 16.82 5.45 18.33 7.14 19.26C8.83 20.19 10.81 20.47 12.7 20.04C14.6 19.61 16.29 18.5 17.43 16.91C18.57 15.32 19.08 13.36 18.86 11.42C18.64 9.48 17.7 7.68 16.22 6.38C14.73 5.07 12.82 4.36 10.87 4.36C8.92 4.36 7 5.08 5.52 6.4L1 10" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
-                  Regenerate
-                </button>
-              </div>
+          <button
+            class="topbar-gen"
+            [disabled]="status() === 'generating'"
+            (click)="regen()">
+            @if (status() === 'generating') {
+              <div class="spinner-sm"></div> Generating...
+            } @else if (result()) {
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M1 4V10H7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M3.51 15C4.15 16.82 5.45 18.33 7.14 19.26C8.83 20.19 10.81 20.47 12.7 20.04C14.6 19.61 16.29 18.5 17.43 16.91C18.57 15.32 19.08 13.36 18.86 11.42C18.64 9.48 17.7 7.68 16.22 6.38C14.73 5.07 12.82 4.36 10.87 4.36C8.92 4.36 7 5.08 5.52 6.4L1 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Regenerate
+            } @else {
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 2L14 8L20 10L14 12L12 18L10 12L4 10L10 8L12 2Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+              Generate
             }
-          </div>
+          </button>
+        </header>
 
-          <!-- Right: controls -->
-          <div class="controls-col">
+        <!-- ═══ CONTENT ═══ -->
+        <div class="content">
 
-            <!-- ── Furniture Editor ── -->
-            <div class="card control-card">
-              <h3 class="section-title">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" style="flex-shrink:0">
-                  <path d="M3 14H21V18H3z" stroke="currentColor" stroke-width="1.5" fill="none"/>
-                  <path d="M5 14V10C5 9 6 8 7 8H17C18 8 19 9 19 10V14" stroke="currentColor" stroke-width="1.5" fill="none"/>
-                  <path d="M3 14V10" stroke="currentColor" stroke-width="1.5"/>
-                  <path d="M21 14V10" stroke="currentColor" stroke-width="1.5"/>
-                </svg>
-                Furniture
-                @if (hasFurnitureChanges()) {
-                  <span class="changes-badge">Modified</span>
-                }
-              </h3>
-
-              <!-- Current furniture items -->
-              <div class="furn-edit-grid">
-                @for (f of availableFurniture(); track f.id) {
-                  <button
-                    type="button"
-                    class="furn-edit-card"
-                    [class.furn-edit-card--active]="isFurnitureSelected(f.id)"
-                    (click)="toggleItem(f.id)"
-                  >
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" [innerHTML]="f.icon"></svg>
-                    <span class="furn-edit-label">{{ f.label }}</span>
-                    @if (isFurnitureSelected(f.id)) {
-                      <div class="furn-edit-check">✓</div>
-                    }
-                  </button>
-                }
-              </div>
-
-              <!-- Regen with changes -->
-              @if (hasFurnitureChanges()) {
-                <div class="furn-actions">
-                  <button class="btn btn-secondary btn-sm" (click)="resetFurniture()">Reset</button>
-                  <button
-                    class="btn btn-primary btn-sm"
-                    [disabled]="status() === 'generating'"
-                    (click)="applyFurnitureChanges()"
-                  >
-                    @if (status() === 'generating') {
-                      <div class="spinner" style="width:14px;height:14px;border-width:2px;border-color:#fff3;border-top-color:#fff"></div>
-                    } @else {
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
-                        <path d="M12 3L13.5 8.5L19 10L13.5 11.5L12 17L10.5 11.5L5 10L10.5 8.5L12 3Z" stroke="currentColor" stroke-width="1.75" stroke-linejoin="round"/>
-                      </svg>
-                    }
-                    Regenerate with changes
-                  </button>
-                </div>
-              }
+          <!-- ── BLUEPRINT TAB ── -->
+          @if (activeTab() === 'blueprint') {
+            <div class="content-fill">
+              <app-floorplan-editor [spec]="room()!" (save)="onFloorplanSave($event)"></app-floorplan-editor>
             </div>
+          }
 
-            <!-- ── Modify Design (text) ── -->
-            <div class="card control-card">
-              <h3 class="section-title">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" style="flex-shrink:0">
-                  <path d="M11 4H4C3.44772 4 3 4.44772 3 5V20C3 20.5523 3.44772 21 4 21H19C19.5523 21 20 20.5523 20 20V13" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/>
-                  <path d="M18.5 2.50001C18.8978 2.10219 19.4374 1.87869 20 1.87869C20.5626 1.87869 21.1022 2.10219 21.5 2.50001C21.8978 2.89784 22.1213 3.43741 22.1213 4.00001C22.1213 4.56262 21.8978 5.10219 21.5 5.50001L12 15L8 16L9 12L18.5 2.50001Z" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-                Custom Changes
-              </h3>
-              <div class="form-field">
-                <textarea
-                  [(ngModel)]="modText"
-                  rows="3"
-                  placeholder="e.g., Add a floor-to-ceiling bookshelf on the left wall…"
-                ></textarea>
-              </div>
-              <button
-                class="btn btn-primary"
-                style="width:100%"
-                [disabled]="!modText.trim() || status() === 'generating'"
-                (click)="modify()"
-              >
-                @if (status() === 'generating') {
-                  <div class="spinner" style="width:16px;height:16px;border-width:2px;border-color:#fff3;border-top-color:#fff"></div>
-                  Applying…
-                } @else {
-                  Apply Changes
-                }
-              </button>
-            </div>
+          <!-- ── DESIGN TAB ── -->
+          @if (activeTab() === 'design') {
+            <div class="design-layout">
 
-            <!-- ── Reference Images ── -->
-            <div class="card control-card">
-              <h3 class="section-title">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" style="flex-shrink:0">
-                  <rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="1.5"/>
-                  <path d="M3 16L8 11L11 14L15 9L21 16" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
-                  <circle cx="8.5" cy="8.5" r="1.5" fill="currentColor"/>
-                </svg>
-                Reference Images
-              </h3>
-              <p class="ref-hint">Upload photos of furniture, tiles, or materials you want in this room</p>
-
-              @if (referenceImages.length) {
-                <div class="ref-grid">
-                  @for (img of referenceImages; track $index; let i = $index) {
-                    <div class="ref-thumb">
-                      <img [src]="img" alt="Reference" />
-                      <button class="ref-remove" (click)="removeRefImage(i)">×</button>
+              <!-- Left: generated image -->
+              <div class="design-main">
+                <div class="img-area">
+                  @if (status() === 'generating') {
+                    <div class="img-state"><div class="spinner"></div><span>Generating 3D design...</span></div>
+                  } @else if (result()) {
+                    <img [src]="result()!.image_base64" [alt]="room()!.name" class="gen-img" />
+                  } @else {
+                    <div class="img-state img-state--empty">
+                      <svg width="44" height="44" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="1"/><path d="M3 16L8 11L11 14L15 9L21 16" stroke="currentColor" stroke-width="1" stroke-linejoin="round"/><circle cx="8.5" cy="8.5" r="1.5" fill="currentColor"/></svg>
+                      <span>No image generated yet</span>
+                      <button class="inline-gen" (click)="regen()" [disabled]="status() === 'generating'">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 2L14 8L20 10L14 12L12 18L10 12L4 10L10 8L12 2Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+                        Generate 3D Design
+                      </button>
                     </div>
                   }
                 </div>
-              }
 
-              <app-web-scanner (imageSelected)="onWebImageScanned($event)"></app-web-scanner>
-              
-              <div style="text-align:center;font-size:11px;color:#9aa0a6;margin-bottom:8px">or</div>
-              <button class="ref-upload-btn" (click)="refFileInput.click()">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
-                  <path d="M12 5V19M5 12H19" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                </svg>
-                Upload File from Computer
-              </button>
-              <input #refFileInput type="file" accept="image/*" style="display:none" (change)="onRefFileSelected($event)" />
-            </div>
+                <!-- Modify bar below image -->
+                <div class="modify-bar">
+                  <textarea
+                    class="modify-input"
+                    [(ngModel)]="modText"
+                    rows="1"
+                    placeholder="Describe changes... e.g. Add a bookshelf on the left wall"
+                  ></textarea>
+                  <button
+                    class="modify-btn"
+                    [disabled]="!modText.trim() || status() === 'generating'"
+                    (click)="modify()">
+                    Apply
+                  </button>
+                </div>
 
-            <!-- Selected Catalog Items -->
-            <div class="card control-card">
-              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 12px;">
-                <h3 class="section-title" style="margin:0">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" style="margin-right:6px">
-                    <path d="M3 9L12 2L21 9V20C21 20.55 20.55 21 20 21H4C3.45 21 3 20.55 3 20V9Z" stroke="currentColor" stroke-width="1.75" stroke-linejoin="round"/>
-                  </svg>
-                  My Catalog Items
-                </h3>
-                <button class="btn btn-secondary btn-sm" (click)="showCatalogPicker.set(true)">
-                  Add from Catalog
-                </button>
+                <!-- Collapsible prompt + history -->
+                @if (result()) {
+                  <div class="meta-row">
+                    <button class="collapse-btn" (click)="showPrompt.set(!showPrompt())">
+                      Generated Prompt
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" [style.transform]="showPrompt() ? 'rotate(180deg)' : ''"><path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                    </button>
+                    @if (result()!.modification_history.length) {
+                      <span class="meta-badge">{{ result()!.modification_history.length }} edits</span>
+                    }
+                  </div>
+                  @if (showPrompt()) {
+                    <p class="prompt-text">{{ result()!.generated_prompt }}</p>
+                  }
+                }
+                @if (result() && result()!.modification_history.length && showPrompt()) {
+                  <ol class="history-list">
+                    @for (m of result()!.modification_history; track $index) {
+                      <li>{{ m }}</li>
+                    }
+                  </ol>
+                }
               </div>
-              <p class="ref-hint" style="margin-top:-6px">Selected catalog items will automatically guide the design.</p>
-              
-              @if (room()?.selected_catalog_items?.length) {
-                <div class="ref-grid" style="margin-top:12px">
-                  @for (cat_id of room()!.selected_catalog_items; track cat_id) {
-                    <div class="ref-thumb">
-                      @if (catalogItemsMap.get(cat_id)?.image_base64) {
-                        <img [src]="catalogItemsMap.get(cat_id)?.image_base64" [alt]="catalogItemsMap.get(cat_id)?.name" />
-                      } @else {
-                        <div class="state-center" style="padding:10px; font-size:24px; background:#f0f2f5;">📦</div>
+
+              <!-- Right: sidebar with sub-sections -->
+              <aside class="design-sidebar">
+                <!-- Sub-section tabs -->
+                <div class="side-tabs">
+                  @for (s of sideSections; track s.id) {
+                    <button
+                      class="side-tab"
+                      [class.side-tab--active]="activeSide() === s.id"
+                      (click)="activeSide.set(s.id)">
+                      {{ s.label }}
+                    </button>
+                  }
+                </div>
+
+                <div class="side-body">
+
+                  <!-- FURNITURE -->
+                  @if (activeSide() === 'furniture') {
+                    <div class="furn-grid">
+                      @for (f of availableFurniture(); track f.id) {
+                        <button
+                          type="button"
+                          class="furn-card"
+                          [class.furn-card--on]="isFurnitureSelected(f.id)"
+                          (click)="toggleItem(f.id)">
+                          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" [innerHTML]="f.icon"></svg>
+                          <span>{{ f.label }}</span>
+                          @if (isFurnitureSelected(f.id)) {
+                            <div class="furn-tick">&#10003;</div>
+                          }
+                        </button>
                       }
-                      <button class="ref-remove" (click)="removeCatalogItem(cat_id)">×</button>
+                    </div>
+                    @if (hasFurnitureChanges()) {
+                      <div class="furn-actions">
+                        <button class="act-btn act-btn--ghost" (click)="resetFurniture()">Reset</button>
+                        <button class="act-btn act-btn--primary" [disabled]="status() === 'generating'" (click)="applyFurnitureChanges()">
+                          Regenerate
+                        </button>
+                      </div>
+                    }
+                  }
+
+                  <!-- REFERENCES -->
+                  @if (activeSide() === 'references') {
+                    <div class="ref-block">
+                      <label class="side-label">Reference Images</label>
+                      @if (referenceImages.length) {
+                        <div class="ref-grid">
+                          @for (img of referenceImages; track $index; let i = $index) {
+                            <div class="ref-thumb">
+                              <img [src]="img" alt="Reference" />
+                              <button class="ref-x" (click)="removeRefImage(i)">&times;</button>
+                            </div>
+                          }
+                        </div>
+                      }
+                      <app-web-scanner (imageSelected)="onWebImageScanned($event)"></app-web-scanner>
+                      <div class="ref-or">or</div>
+                      <button class="ref-upload" (click)="refFileInput.click()">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 5V19M5 12H19" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                        Upload Image
+                      </button>
+                      <input #refFileInput type="file" accept="image/*" style="display:none" (change)="onRefFileSelected($event)" />
+                    </div>
+
+                    <div class="ref-block">
+                      <div class="ref-block-head">
+                        <label class="side-label">Catalog Items</label>
+                        <button class="act-btn act-btn--xs" (click)="showCatalogPicker.set(true)">Add</button>
+                      </div>
+                      @if (room()?.selected_catalog_items?.length) {
+                        <div class="ref-grid">
+                          @for (cat_id of room()!.selected_catalog_items; track cat_id) {
+                            <div class="ref-thumb">
+                              @if (catalogItemsMap.get(cat_id)?.image_base64) {
+                                <img [src]="catalogItemsMap.get(cat_id)?.image_base64" [alt]="catalogItemsMap.get(cat_id)?.name" />
+                              } @else {
+                                <div class="thumb-empty">?</div>
+                              }
+                              <button class="ref-x" (click)="removeCatalogItem(cat_id)">&times;</button>
+                            </div>
+                          }
+                        </div>
+                      } @else {
+                        <p class="side-hint" style="opacity:.5">No catalog items selected.</p>
+                      }
                     </div>
                   }
-                </div>
-              }
-            </div>
 
-            <!-- Room Details -->
-            <div class="card control-card">
-              <h3 class="section-title">Room Details</h3>
-              @if (room()!.furniture_preferences.length) {
-                <div class="detail-row">
-                  <span class="detail-label">Furniture</span>
-                  <div class="chip-list">
-                    @for (f of room()!.furniture_preferences; track f) {
-                      <span class="chip">{{ f }}</span>
+                  <!-- DETAILS -->
+                  @if (activeSide() === 'details') {
+                    <div class="det">
+                      <label class="side-label">Dimensions</label>
+                      <p class="det-val">{{ room()!.dimensions.width }} ft &times; {{ room()!.dimensions.length }} ft &times; {{ room()!.dimensions.height }} ft ceiling</p>
+                    </div>
+                    @if (room()!.furniture_preferences.length) {
+                      <div class="det">
+                        <label class="side-label">Furniture</label>
+                        <div class="chip-row">
+                          @for (f of room()!.furniture_preferences; track f) {
+                            <span class="det-chip">{{ f }}</span>
+                          }
+                        </div>
+                      </div>
                     }
-                  </div>
-                </div>
-              }
-              @if (room()!.notes) {
-                <div class="detail-row">
-                  <span class="detail-label">Notes</span>
-                  <p class="detail-notes">{{ room()!.notes }}</p>
-                </div>
-              }
-              @if (!room()!.furniture_preferences.length && !room()!.notes) {
-                <p class="empty-details">No additional details specified</p>
-              }
-            </div>
+                    @if (room()!.color_preferences?.length) {
+                      <div class="det">
+                        <label class="side-label">Colors</label>
+                        <div class="chip-row">
+                          @for (c of room()!.color_preferences; track c) {
+                            <span class="det-chip">{{ c }}</span>
+                          }
+                        </div>
+                      </div>
+                    }
+                    <div class="det">
+                      <label class="side-label">Notes</label>
+                      <p class="det-val">{{ room()!.notes || 'No additional notes.' }}</p>
+                    </div>
+                    @if (room()!.blueprint_elements?.length) {
+                      <div class="det">
+                        <label class="side-label">Blueprint</label>
+                        <p class="det-val det-val--accent">{{ room()!.blueprint_elements!.length }} elements mapped</p>
+                      </div>
+                    }
+                  }
 
-            <!-- Generated Prompt -->
-            @if (result()) {
-              <div class="card control-card">
-                <button class="prompt-toggle" (click)="showPrompt.set(!showPrompt())">
-                  <span class="section-title" style="margin:0">Generated Prompt</span>
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" [style.transform]="showPrompt() ? 'rotate(180deg)' : ''">
-                    <path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
-                </button>
-                @if (showPrompt()) {
-                  <p class="prompt-text">{{ result()!.generated_prompt }}</p>
+                </div>
+              </aside>
+
+            </div>
+          }
+
+        </div>
+
+        <!-- Catalog picker modal -->
+        @if (showCatalogPicker()) {
+          <div class="modal-bg" (click)="showCatalogPicker.set(false)">
+            <div class="modal" (click)="$event.stopPropagation()">
+              <div class="modal-top">
+                <h2>Select Catalog Items</h2>
+                <button class="modal-x" (click)="showCatalogPicker.set(false)">&times;</button>
+              </div>
+              <div class="catalog-grid">
+                @for (item of availableCatalogItems(); track item.id) {
+                  <div class="cat-card"
+                       [class.cat-card--on]="room()?.selected_catalog_items?.includes(item.id)"
+                       (click)="toggleCatalogItem(item.id)">
+                    <div class="cat-card-img">
+                      @if (item.image_base64) {
+                        <img [src]="item.image_base64" />
+                      } @else {
+                        <div class="thumb-empty" style="height:100%">?</div>
+                      }
+                    </div>
+                    <div class="cat-card-name">{{ item.name }}</div>
+                  </div>
                 }
               </div>
-            }
-
-            <!-- Modification History -->
-            @if (result() && result()!.modification_history.length) {
-              <div class="card control-card">
-                <h3 class="section-title">History</h3>
-                <ol class="history-list">
-                  @for (m of result()!.modification_history; track $index) {
-                    <li>{{ m }}</li>
-                  }
-                </ol>
-              </div>
-            }
-          </div>
-        </div>
-      }
-      <!-- Catalog Picker Modal -->
-      @if (showCatalogPicker()) {
-        <div class="modal-backdrop" (click)="showCatalogPicker.set(false)">
-          <div class="modal card" (click)="$event.stopPropagation()">
-            <div class="modal-header" style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 20px;">
-              <h2 style="margin:0; font-family:'Google Sans', sans-serif; font-weight:400;">Select Catalog Items</h2>
-              <button class="btn btn-icon" (click)="showCatalogPicker.set(false)">×</button>
-            </div>
-            
-            <div class="catalog-grid" style="display:grid; grid-template-columns: repeat(3, 1fr); gap:12px; max-height: 400px; overflow-y:auto; padding-right:8px;">
-              @for (item of availableCatalogItems(); track item.id) {
-                <div class="item-card" 
-                     style="border: 2px solid transparent; cursor: pointer; border-radius: 8px; overflow: hidden; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.1);"
-                     [style.border-color]="room()?.selected_catalog_items?.includes(item.id) ? '#1a73e8' : 'transparent'"
-                     (click)="toggleCatalogItem(item.id)">
-                  <div class="item-card__image" style="aspect-ratio:4/3; background:#f0f2f5;">
-                    @if (item.image_base64) {
-                      <img [src]="item.image_base64" style="width:100%; height:100%; object-fit:cover;" />
-                    } @else {
-                      <div class="state-center" style="height:100%; font-size:32px;">📦</div>
-                    }
-                  </div>
-                  <div style="padding: 10px;">
-                    <div style="font-size:12px; font-weight:600; margin-bottom:4px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">{{ item.name }}</div>
-                  </div>
+              @if (!availableCatalogItems().length) {
+                <div style="padding:40px;text-align:center;color:#5f6368">
+                  No items yet. <a routerLink="/catalog" style="color:#1a73e8">Browse catalog</a>
                 </div>
               }
             </div>
-            @if (!availableCatalogItems().length) {
-              <div class="state-center" style="padding:40px; text-align:center; color:#5f6368;">
-                No items in your catalog yet.<br/>
-                <a routerLink="/catalog" style="color:#1a73e8; text-decoration:none;">Go back and browse the catalog</a>
-              </div>
-            }
           </div>
-        </div>
+        }
+
       }
     </div>
   `,
   styles: `
-    .state-center { display:flex; justify-content:center; padding:80px; }
-
-    .detail-header {
-      margin-bottom: 28px;
-    }
-    .back-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 13px;
-      color: #1a73e8;
-      text-decoration: none;
-      margin-bottom: 12px;
-      &:hover { text-decoration: underline; }
-    }
-    .detail-title {
-      font-family: 'Google Sans','Roboto',sans-serif;
-      font-size: 24px;
-      font-weight: 400;
-      color: #202124;
-      margin: 0 0 8px;
-    }
-    .header-meta {
+    /* ═══════════════════════════════════════════
+       PAGE
+       ═══════════════════════════════════════════ */
+    :host { display: block; }
+    .page {
       display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .meta-sep { color: #bdc1c6; }
-    .meta-dim { font-size: 13px; color: #5f6368; }
-
-    .detail-layout {
-      display: grid;
-      grid-template-columns: 1fr 360px;
-      gap: 20px;
-      align-items: start;
-    }
-
-    .image-col { position: sticky; top: 80px; }
-
-    .image-wrap {
-      border-radius: 8px;
+      flex-direction: column;
+      height: calc(100vh - 64px);
       overflow: hidden;
-      border: 1px solid #e8eaed;
-      aspect-ratio: 4/3;
-      background: #f8f9fa;
     }
-    .room-img {
-      width: 100%; height: 100%;
-      object-fit: cover;
-      display: block;
+    .loader {
+      flex: 1; display: flex;
+      align-items: center; justify-content: center;
     }
-    .image-state {
-      width: 100%; height: 100%;
+
+    /* ═══════════════════════════════════════════
+       TOPBAR
+       ═══════════════════════════════════════════ */
+    .topbar {
       display: flex;
-      flex-direction: column;
       align-items: center;
-      justify-content: center;
       gap: 12px;
-      color: #1a73e8;
-      font-size: 13px;
-      font-weight: 500;
-      &--empty {
-        color: #9aa0a6;
-        font-weight: 400;
-      }
-    }
-    .image-actions {
-      display: flex;
-      justify-content: flex-end;
-      margin-top: 10px;
-    }
-
-    .controls-col {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-    .control-card { padding: 16px 20px; }
-
-    .section-title {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 12px;
-    }
-
-    /* ── Furniture editor ── */
-    .furn-edit-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(85px, 1fr));
-      gap: 6px;
-      margin-bottom: 12px;
-    }
-    .furn-edit-card {
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 4px;
-      padding: 10px 4px 8px;
+      padding: 0 20px;
+      height: 52px;
       background: #fff;
-      border: 1.5px solid #e8eaed;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: all .15s;
-      svg { color: #9aa0a6; transition: color .15s; }
-      &--active {
-        border-color: #1a73e8;
-        background: #f0f4ff;
-        svg { color: #1a73e8; }
-        .furn-edit-label { color: #1a73e8; }
-      }
-      &:hover:not(.furn-edit-card--active) {
-        border-color: #bdc1c6;
-        background: #f8f9fa;
-      }
+      border-bottom: 1px solid #e0e0e0;
+      flex-shrink: 0;
     }
-    .furn-edit-label {
-      font-size: 9px;
-      font-weight: 500;
+    .topbar-back {
+      display: flex; align-items: center; justify-content: center;
+      width: 34px; height: 34px; border-radius: 8px;
+      color: #5f6368; text-decoration: none;
+      &:hover { background: #f1f3f4; }
+    }
+    .topbar-name {
+      font-family: 'Google Sans', 'Roboto', sans-serif;
+      font-size: 16px; font-weight: 600; color: #202124; margin: 0;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .topbar-type {
+      font-size: 10px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .04em; color: #5f6368; background: #f1f3f4;
+      padding: 3px 10px; border-radius: 6px; white-space: nowrap;
+    }
+    .topbar-dims { font-size: 11px; color: #9aa0a6; white-space: nowrap; }
+    .topbar-spacer { flex: 1; }
+    .topbar-gen {
+      display: flex; align-items: center; gap: 6px;
+      height: 34px; padding: 0 20px;
+      background: #1a73e8; color: #fff; border: none; border-radius: 10px;
+      font-size: 13px; font-weight: 600; cursor: pointer; white-space: nowrap;
+      &:hover:not(:disabled) { background: #1765cc; }
+      &:disabled { opacity: .6; cursor: default; }
+    }
+
+    /* ═══════════════════════════════════════════
+       2 ROUNDED TABS — centered in topbar
+       ═══════════════════════════════════════════ */
+    .tab-group {
+      display: flex;
+      gap: 4px;
+      background: #f1f3f4;
+      border-radius: 12px;
+      padding: 3px;
+    }
+    .tab {
+      display: flex; align-items: center; gap: 7px;
+      padding: 7px 22px;
+      border-radius: 10px;
+      background: transparent;
+      border: none;
+      font-size: 13px; font-weight: 600;
       color: #5f6368;
-      text-align: center;
-      line-height: 1.2;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all .15s;
+      svg { flex-shrink: 0; color: inherit; }
+      &:hover:not(.tab--active) { background: rgba(0,0,0,.04); }
+      &--active {
+        background: #fff;
+        color: #1a73e8;
+        box-shadow: 0 1px 3px rgba(0,0,0,.1);
+      }
     }
-    .furn-edit-check {
-      position: absolute;
-      top: 3px; right: 3px;
-      width: 14px; height: 14px;
-      background: #1a73e8;
-      color: #fff;
-      border-radius: 50%;
-      font-size: 8px;
+
+    /* ═══════════════════════════════════════════
+       CONTENT — fills everything below topbar
+       ═══════════════════════════════════════════ */
+    .content {
+      flex: 1; min-height: 0;
+      display: flex; flex-direction: column;
+      overflow: hidden;
+    }
+
+    /* Blueprint: editor fills all */
+    .content-fill {
+      flex: 1; display: flex; min-height: 0;
+      app-floorplan-editor {
+        flex: 1; display: flex; min-height: 0;
+        ::ng-deep .editor-wrap {
+          height: 100% !important;
+          min-height: 0;
+          border: none;
+          border-radius: 0;
+        }
+      }
+    }
+
+    /* ═══════════════════════════════════════════
+       DESIGN TAB — image left, sidebar right
+       ═══════════════════════════════════════════ */
+    .design-layout {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      min-height: 0;
+      overflow: hidden;
+    }
+
+    /* ── Image / Main area ── */
+    .design-main {
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+      overflow-y: auto;
+      background: #f4f5f7;
+    }
+    .img-area {
+      flex: 1;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-weight: 700;
+      min-height: 0;
+      padding: 20px;
     }
-    .changes-badge {
-      font-size: 10px;
-      font-weight: 600;
-      color: #e37400;
-      background: #fef3e0;
-      padding: 2px 8px;
-      border-radius: 10px;
-      margin-left: auto;
+    .gen-img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      border-radius: 8px;
+      box-shadow: 0 4px 20px rgba(0,0,0,.08);
     }
-    .furn-actions {
-      display: flex;
-      gap: 8px;
-      justify-content: flex-end;
-      padding-top: 8px;
+    .img-state {
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 10px;
+      color: #1a73e8; font-size: 13px; font-weight: 500;
+      &--empty { color: #bdc1c6; }
+    }
+    .inline-gen {
+      display: flex; align-items: center; gap: 6px;
+      margin-top: 10px; padding: 9px 22px;
+      background: #1a73e8; color: #fff; border: none; border-radius: 10px;
+      font-size: 13px; font-weight: 600; cursor: pointer;
+      &:hover:not(:disabled) { background: #1765cc; }
+      &:disabled { opacity: .6; }
+    }
+
+    /* ── Modify bar ── */
+    .modify-bar {
+      display: flex; gap: 8px;
+      padding: 12px 20px;
+      background: #fff;
+      border-top: 1px solid #e8eaed;
+      flex-shrink: 0;
+    }
+    .modify-input {
+      flex: 1;
+      border: 1px solid #dadce0; border-radius: 10px;
+      padding: 10px 14px; font-size: 13px;
+      resize: none; outline: none; font-family: inherit;
+      &:focus { border-color: #1a73e8; box-shadow: 0 0 0 2px rgba(26,115,232,.1); }
+    }
+    .modify-btn {
+      height: 38px; padding: 0 20px;
+      background: #1a73e8; color: #fff; border: none; border-radius: 10px;
+      font-size: 13px; font-weight: 600; cursor: pointer; white-space: nowrap;
+      &:hover:not(:disabled) { background: #1765cc; }
+      &:disabled { opacity: .5; cursor: default; }
+    }
+
+    /* ── Prompt / History ── */
+    .meta-row {
+      display: flex; align-items: center; gap: 8px;
+      padding: 6px 20px;
+      background: #fff;
       border-top: 1px solid #f1f3f4;
+      flex-shrink: 0;
     }
-    .btn-sm {
-      font-size: 12px;
-      padding: 6px 14px;
-      height: 32px;
+    .collapse-btn {
+      display: flex; align-items: center; gap: 6px;
+      background: none; border: none; cursor: pointer;
+      color: #5f6368; font-size: 11px; font-weight: 600;
+      svg { transition: transform .2s; }
     }
-
-    .detail-row {
-      margin-bottom: 12px;
-      &:last-child { margin-bottom: 0; }
-    }
-    .detail-label {
-      display: block;
-      font-size: 11px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-      color: #9aa0a6;
-      margin-bottom: 6px;
-    }
-    .chip-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-    }
-    .detail-notes {
-      font-size: 13px;
-      color: #3c4043;
-      margin: 0;
-      line-height: 1.5;
-    }
-    .empty-details {
-      font-size: 13px;
-      color: #9aa0a6;
-      margin: 0;
-    }
-
-    .prompt-toggle {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      width: 100%;
-      background: none;
-      border: none;
-      padding: 0;
-      cursor: pointer;
-      color: inherit;
-      margin-bottom: 0;
-      svg { color: #5f6368; transition: transform .2s; flex-shrink:0; }
+    .meta-badge {
+      font-size: 10px; font-weight: 600; color: #1a73e8;
+      background: #e8f0fe; padding: 2px 8px; border-radius: 6px;
     }
     .prompt-text {
-      font-size: 12px;
-      line-height: 1.7;
-      color: #5f6368;
-      margin: 12px 0 0;
+      font-size: 11px; line-height: 1.7; color: #5f6368;
+      margin: 0; padding: 0 20px 10px;
+      background: #fff; word-break: break-word;
+    }
+    .history-list {
+      margin: 0; padding: 0 20px 12px 38px;
+      background: #fff;
+      li { font-size: 11px; color: #5f6368; margin-bottom: 2px; line-height: 1.5; }
     }
 
-    .history-list {
-      margin: 0;
-      padding-left: 16px;
-      li {
-        font-size: 12px;
-        color: #5f6368;
-        margin-bottom: 6px;
-        line-height: 1.5;
+    /* ═══════════════════════════════════════════
+       SIDEBAR — Furniture / References / Details
+       ═══════════════════════════════════════════ */
+    .design-sidebar {
+      display: flex;
+      flex-direction: column;
+      border-left: 1px solid #e0e0e0;
+      background: #fff;
+      min-height: 0;
+    }
+    .side-tabs {
+      display: flex;
+      border-bottom: 1px solid #eee;
+      flex-shrink: 0;
+    }
+    .side-tab {
+      flex: 1;
+      padding: 10px 0;
+      background: none; border: none;
+      border-bottom: 2px solid transparent;
+      font-size: 11px; font-weight: 700;
+      color: #9aa0a6; cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: .03em;
+      transition: color .12s;
+      &:hover { color: #5f6368; }
+      &--active {
+        color: #1a73e8;
+        border-bottom-color: #1a73e8;
       }
     }
+    .side-body {
+      flex: 1; overflow-y: auto;
+      padding: 14px;
+      -webkit-overflow-scrolling: touch;
+    }
+    .side-label {
+      display: block;
+      font-size: 10px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .04em;
+      color: #9aa0a6; margin-bottom: 8px;
+    }
+    .side-hint {
+      font-size: 11px; color: #9aa0a6; margin: 0 0 8px;
+    }
 
-    /* ── Reference Images ── */
-    .ref-hint {
-      font-size: 11px;
-      color: #9aa0a6;
-      margin: 0 0 10px;
+    /* ── Furniture ── */
+    .furn-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+      gap: 6px; margin-bottom: 8px;
+    }
+    .furn-card {
+      position: relative;
+      display: flex; flex-direction: column;
+      align-items: center; gap: 4px;
+      padding: 10px 4px 8px;
+      background: #fff; border: 1.5px solid #e8eaed; border-radius: 10px;
+      cursor: pointer; transition: all .12s;
+      svg { color: #9aa0a6; }
+      span { font-size: 9px; font-weight: 500; color: #5f6368; text-align: center; line-height: 1.2; }
+      &--on {
+        border-color: #1a73e8; background: #eef3ff;
+        svg { color: #1a73e8; }
+        span { color: #1a73e8; }
+      }
+      &:hover:not(.furn-card--on) { border-color: #bdc1c6; }
+    }
+    .furn-tick {
+      position: absolute; top: 3px; right: 3px;
+      width: 14px; height: 14px;
+      background: #1a73e8; color: #fff; border-radius: 50%;
+      font-size: 8px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .furn-actions {
+      display: flex; gap: 6px; justify-content: flex-end;
+      padding-top: 8px; border-top: 1px solid #f1f3f4;
+    }
+
+    /* ── References ── */
+    .ref-block { margin-bottom: 16px; &:last-child { margin-bottom: 0; } }
+    .ref-block-head {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 4px;
     }
     .ref-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
-      gap: 6px;
-      margin-bottom: 10px;
+      grid-template-columns: repeat(auto-fill, minmax(56px, 1fr));
+      gap: 6px; margin-bottom: 8px;
     }
     .ref-thumb {
-      position: relative;
-      aspect-ratio: 1;
-      border-radius: 6px;
-      overflow: hidden;
-      border: 1px solid #e8eaed;
-      img {
-        width: 100%; height: 100%;
-        object-fit: cover;
-        display: block;
-      }
+      position: relative; aspect-ratio: 1;
+      border-radius: 6px; overflow: hidden; border: 1px solid #e8eaed;
+      img { width: 100%; height: 100%; object-fit: cover; display: block; }
     }
-    .ref-remove {
-      position: absolute;
-      top: 2px; right: 2px;
-      width: 18px; height: 18px;
-      background: rgba(0,0,0,.6);
-      color: #fff;
-      border: none;
-      border-radius: 50%;
-      font-size: 13px;
+    .ref-x {
+      position: absolute; top: 2px; right: 2px;
+      width: 16px; height: 16px;
+      background: rgba(0,0,0,.55); color: #fff;
+      border: none; border-radius: 50%; font-size: 12px;
       cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      display: flex; align-items: center; justify-content: center;
       &:hover { background: #d93025; }
     }
-    .ref-upload-btn {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      width: 100%;
-      height: 34px;
-      justify-content: center;
-      background: #fff;
-      border: 1.5px dashed #dadce0;
-      border-radius: 6px;
-      color: #1a73e8;
-      font-size: 12px;
-      font-weight: 500;
-      cursor: pointer;
-      transition: border-color .15s, background .15s;
+    .ref-or { text-align: center; font-size: 10px; color: #9aa0a6; margin: 4px 0; }
+    .ref-upload {
+      display: flex; align-items: center; gap: 6px;
+      width: 100%; height: 32px; justify-content: center;
+      background: #fff; border: 1.5px dashed #dadce0; border-radius: 8px;
+      color: #1a73e8; font-size: 11px; font-weight: 500; cursor: pointer;
       &:hover { border-color: #1a73e8; background: #f8f9ff; }
     }
+    .thumb-empty {
+      display: flex; align-items: center; justify-content: center;
+      background: #f1f3f4; color: #9aa0a6;
+      font-size: 16px; font-weight: 700;
+      width: 100%; aspect-ratio: 1;
+    }
 
-    /* ── Modal ── */
-    .modal-backdrop {
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,.4);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 1000;
-      backdrop-filter: blur(2px);
+    /* ── Details ── */
+    .det { margin-bottom: 14px; }
+    .det-val {
+      font-size: 13px; color: #3c4043; margin: 4px 0 0; line-height: 1.5;
+      &--accent { color: #1a73e8; font-weight: 600; }
+    }
+    .chip-row { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 4px; }
+    .det-chip {
+      font-size: 10px; padding: 3px 10px;
+      background: #f1f3f4; border-radius: 8px; color: #3c4043;
+    }
+
+    /* ── Action buttons ── */
+    .act-btn {
+      display: inline-flex; align-items: center; gap: 5px;
+      height: 28px; padding: 0 14px;
+      border-radius: 8px; font-size: 11px; font-weight: 600;
+      cursor: pointer; white-space: nowrap;
+      &--primary {
+        background: #1a73e8; color: #fff; border: none;
+        &:hover:not(:disabled) { background: #1765cc; }
+        &:disabled { opacity: .5; }
+      }
+      &--ghost {
+        background: #fff; color: #3c4043; border: 1px solid #dadce0;
+        &:hover { background: #f8f9fa; }
+      }
+      &--xs {
+        height: 22px; padding: 0 10px; font-size: 10px;
+        background: #fff; color: #1a73e8; border: 1px solid #dadce0; border-radius: 6px;
+        &:hover { background: #f8f9ff; }
+      }
+    }
+
+    /* ═══════════════════════════════════════════
+       MODAL
+       ═══════════════════════════════════════════ */
+    .modal-bg {
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,.35);
+      display: flex; align-items: center; justify-content: center;
+      z-index: 1000; backdrop-filter: blur(2px);
     }
     .modal {
-      width: 520px;
-      max-width: 90vw;
-      max-height: 90vh;
-      overflow-y: auto;
-      padding: 24px;
+      width: 560px; max-width: 92vw; max-height: 80vh;
+      overflow-y: auto; padding: 24px;
+      background: #fff; border-radius: 14px;
+      box-shadow: 0 16px 48px rgba(0,0,0,.15);
+    }
+    .modal-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 18px;
+      h2 { margin: 0; font-size: 17px; font-weight: 600; }
+    }
+    .modal-x {
+      width: 30px; height: 30px;
+      background: none; border: none; font-size: 22px; color: #5f6368;
+      cursor: pointer; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      &:hover { background: #f1f3f4; }
+    }
+    .catalog-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    .cat-card {
+      border: 2px solid transparent; border-radius: 10px;
+      overflow: hidden; background: #fff;
+      box-shadow: 0 1px 3px rgba(0,0,0,.08); cursor: pointer;
+      &--on { border-color: #1a73e8; }
+      &:hover:not(.cat-card--on) { border-color: #dadce0; }
+    }
+    .cat-card-img {
+      aspect-ratio: 4/3; background: #f1f3f4;
+      img { width: 100%; height: 100%; object-fit: cover; }
+    }
+    .cat-card-name {
+      padding: 8px 10px; font-size: 12px; font-weight: 600;
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
     }
 
+    /* ═══════════════════════════════════════════
+       SPINNER
+       ═══════════════════════════════════════════ */
+    .spinner {
+      width: 24px; height: 24px;
+      border: 3px solid #e8eaed; border-top-color: #1a73e8;
+      border-radius: 50%; animation: spin .6s linear infinite;
+    }
+    .spinner-sm {
+      width: 13px; height: 13px;
+      border: 2px solid rgba(255,255,255,.3); border-top-color: #fff;
+      border-radius: 50%; animation: spin .6s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ═══════════════════════════════════════════
+       RESPONSIVE
+       ═══════════════════════════════════════════ */
+
+    /* Design sidebar stacks below on narrow screens */
     @media (max-width: 900px) {
-      .detail-layout { grid-template-columns: 1fr; }
-      .image-col { position: static; }
+      .design-layout {
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr auto;
+      }
+      .design-sidebar {
+        border-left: none;
+        border-top: 1px solid #e0e0e0;
+        max-height: 45vh;
+      }
+    }
+
+    /* Mobile */
+    @media (max-width: 768px) {
+      .topbar { padding: 0 12px; gap: 8px; flex-wrap: wrap; height: auto; min-height: 52px; padding-top: 8px; padding-bottom: 8px; }
+      .topbar-dims, .topbar-type { display: none; }
+      .topbar-spacer { display: none; }
+      .tab-group { order: 10; margin: 4px auto 0; }
+      .topbar-gen { order: 5; }
+
+      .tab { padding: 6px 16px; font-size: 12px; }
+    }
+
+    /* Phone */
+    @media (max-width: 480px) {
+      .topbar-name { font-size: 14px; max-width: 120px; }
+      .topbar-gen { padding: 0 12px; font-size: 11px; height: 30px; }
+      .tab { padding: 5px 14px; font-size: 11px; gap: 5px; }
+      .tab svg { width: 14px; height: 14px; }
+      .side-body { padding: 10px; }
+      .furn-grid { grid-template-columns: repeat(auto-fill, minmax(70px, 1fr)); }
     }
   `,
 })
@@ -643,20 +783,32 @@ export class RoomDetailComponent implements OnInit {
   projectId = '';
   private roomId = '';
 
+  activeTab = signal<MainTab>('blueprint');
+  activeSide = signal<SideSection>('furniture');
+
+  sideSections: { id: SideSection; label: string }[] = [
+    { id: 'furniture', label: 'Furniture' },
+    { id: 'references', label: 'References' },
+    { id: 'details', label: 'Details' },
+  ];
+
+  mobilePanels = [
+    { id: 'preview' as const, label: 'Preview' },
+    { id: 'blueprint' as const, label: 'Blueprint' },
+    { id: 'elements' as const, label: 'Elements' },
+  ];
+
   project;
   room;
   result;
   status;
 
-  // Furniture editor state — simple arrays, not fragile computed chains
   editedFurnitureList: string[] = [];
   originalFurnitureList: string[] = [];
   furnitureInitialized = false;
 
-  // Reference images uploaded by the user
   referenceImages: string[] = [];
-  
-  // Catalog Items
+
   showCatalogPicker = signal(false);
   availableCatalogItems = signal<CatalogItem[]>([]);
   catalogItemsMap = new Map<string, CatalogItem>();
@@ -678,7 +830,7 @@ export class RoomDetailComponent implements OnInit {
   }
 
   constructor(
-    public store: ProjectStore, 
+    public store: ProjectStore,
     private route: ActivatedRoute,
     private catalogService: CatalogService
   ) {
@@ -705,7 +857,7 @@ export class RoomDetailComponent implements OnInit {
       this.availableCatalogItems.set(items);
       items.forEach(i => this.catalogItemsMap.set(i.id, i));
     } catch (e) {
-      console.error("Failed to load catalog items", e);
+      console.error('Failed to load catalog items', e);
     }
   }
 
@@ -713,7 +865,6 @@ export class RoomDetailComponent implements OnInit {
     const room = this.room();
     if (!room) return;
     const available = this.availableFurniture();
-    // Convert furniture_preferences labels → IDs
     const ids = room.furniture_preferences
       .map(label => available.find(f => f.label.toLowerCase() === label.toLowerCase())?.id)
       .filter((id): id is string => !!id);
@@ -746,7 +897,6 @@ export class RoomDetailComponent implements OnInit {
 
   async applyFurnitureChanges() {
     if (!this.hasFurnitureChanges()) return;
-
     const available = this.availableFurniture();
     const added = this.editedFurnitureList
       .filter(id => !this.originalFurnitureList.includes(id))
@@ -757,28 +907,18 @@ export class RoomDetailComponent implements OnInit {
       .map(id => available.find(f => f.id === id)?.label)
       .filter(Boolean);
 
-    // Build modification prompt
     const parts: string[] = [];
-    if (removed.length) {
-      parts.push(`Remove the following from the room: ${removed.join(', ')}`);
-    }
-    if (added.length) {
-      parts.push(`Add the following to the room: ${added.join(', ')}`);
-    }
+    if (removed.length) parts.push(`Remove the following from the room: ${removed.join(', ')}`);
+    if (added.length) parts.push(`Add the following to the room: ${added.join(', ')}`);
     const modPrompt = parts.join('. ') + '. Keep everything else the same.';
 
-    // If there's an existing result, modify it. Otherwise generate fresh.
     if (this.result()) {
       await this.store.modifyRoom(this.roomId, modPrompt, this.referenceImages);
     } else {
       await this.store.generateRoom(this.roomId, this.referenceImages);
     }
-
-    // Reset furniture edit state to reflect new state
     this.originalFurnitureList = [...this.editedFurnitureList];
   }
-
-  // ── Reference Image Handlers ──
 
   onWebImageScanned(url: string) {
     this.referenceImages = [...this.referenceImages, url];
@@ -788,18 +928,10 @@ export class RoomDetailComponent implements OnInit {
     const room = this.room();
     if (!room) return;
     const currentList = room.selected_catalog_items || [];
-    let updatedList: string[];
-    if (currentList.includes(itemId)) {
-      updatedList = currentList.filter(id => id !== itemId);
-    } else {
-      updatedList = [...currentList, itemId];
-    }
-    
-    // Save to backend immediately
-    await this.store.updateRoom(this.roomId, {
-      ...room,
-      selected_catalog_items: updatedList
-    });
+    const updatedList = currentList.includes(itemId)
+      ? currentList.filter(id => id !== itemId)
+      : [...currentList, itemId];
+    await this.store.updateRoom(this.roomId, { ...room, selected_catalog_items: updatedList });
   }
 
   async removeCatalogItem(itemId: string) {
@@ -807,11 +939,9 @@ export class RoomDetailComponent implements OnInit {
     if (!room) return;
     const currentList = room.selected_catalog_items || [];
     if (!currentList.includes(itemId)) return;
-    const updatedList = currentList.filter(id => id !== itemId);
-    
     await this.store.updateRoom(this.roomId, {
       ...room,
-      selected_catalog_items: updatedList
+      selected_catalog_items: currentList.filter(id => id !== itemId),
     });
   }
 
@@ -819,32 +949,25 @@ export class RoomDetailComponent implements OnInit {
     const input = event.target as HTMLInputElement;
     const file = input.files?.[0];
     if (!file) return;
-    if (file.size > 2 * 1024 * 1024) {
-      alert('Image must be under 2MB');
-      return;
-    }
+    if (file.size > 2 * 1024 * 1024) { alert('Image must be under 2MB'); return; }
     const reader = new FileReader();
-    reader.onload = () => {
-      this.referenceImages = [...this.referenceImages, reader.result as string];
-    };
+    reader.onload = () => { this.referenceImages = [...this.referenceImages, reader.result as string]; };
     reader.readAsDataURL(file);
-    input.value = ''; // reset so same file can be re-uploaded
+    input.value = '';
   }
 
   removeRefImage(index: number) {
     this.referenceImages = this.referenceImages.filter((_, i) => i !== index);
   }
 
-  async onFloorplanSave(event: {elements: BlueprintElement[], image: string}) {
+  async onFloorplanSave(event: { elements: BlueprintElement[]; image: string }) {
     const room = this.room();
     if (!room) return;
-    
-    // Pass raw elements and the synthesized image footprint up to the state
     await this.store.updateRoom(this.roomId, {
       ...room,
       blueprint_elements: event.elements,
-      blueprint_image: event.image
+      blueprint_image: event.image,
     });
-    alert('Floorplan architecture mapped successfully! Click Regenerate to visualize the 3D room.');
+    alert('Floorplan locked! Click Generate to create the 3D design.');
   }
 }

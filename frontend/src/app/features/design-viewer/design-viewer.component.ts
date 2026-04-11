@@ -114,6 +114,7 @@ import { ProjectStore } from '../../core/store/project.store';
     </div>
   `,
   styles: `
+    .viewer { padding: 32px 0; }
     .state-center { display:flex; justify-content:center; padding:80px; }
 
     .page-header {
@@ -131,13 +132,14 @@ import { ProjectStore } from '../../core/store/project.store';
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 36px; height: 36px;
-      border-radius: 50%;
+      width: 40px; height: 40px;
+      border-radius: 12px;
       color: #5f6368;
       text-decoration: none;
       margin-top: 2px;
-      transition: background .15s;
-      &:hover { background: #f1f3f4; color: #202124; }
+      background: #f1f3f4;
+      transition: background .15s, box-shadow .15s, color .15s;
+      &:hover { background: #e8f0fe; color: #1a73e8; box-shadow: 0 1px 4px rgba(26,115,232,.15); }
     }
     .page-title {
       font-family: 'Google Sans', 'Roboto', sans-serif;
@@ -173,8 +175,9 @@ import { ProjectStore } from '../../core/store/project.store';
 
     .rooms-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 16px;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 20px;
+      max-width: 1600px;
     }
     .room-card {
       cursor: pointer;
@@ -222,6 +225,11 @@ import { ProjectStore } from '../../core/store/project.store';
     .room-name { font-size: 14px; font-weight: 500; color: #202124; }
     .room-type { font-size: 12px; color: #5f6368; text-transform: capitalize; }
     .room-dims { font-size: 12px; color: #9aa0a6; }
+
+    @media (max-width: 768px) {
+      .page-header { flex-wrap: wrap; gap: 12px; }
+      .rooms-grid { grid-template-columns: 1fr; }
+    }
   `,
 })
 export class DesignViewerComponent implements OnInit {

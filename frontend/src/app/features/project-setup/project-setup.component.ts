@@ -334,22 +334,29 @@ const STYLE_ICONS: Record<string, string> = {
     </div>
   `,
   styles: `
-    .setup { max-width: 760px; }
+    .setup { max-width: 960px; margin: 0 auto; padding-top: 32px; }
 
     .setup-nav {
       display: flex;
       align-items: center;
       justify-content: space-between;
       margin-bottom: 32px;
+      flex-wrap: wrap;
+      gap: 12px;
     }
     .back-link {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
+      gap: 8px;
+      padding: 8px 16px 8px 12px;
       font-size: 14px;
+      font-weight: 500;
       color: #1a73e8;
       text-decoration: none;
-      &:hover { text-decoration: underline; }
+      background: #e8f0fe;
+      border-radius: 20px;
+      transition: background .15s, box-shadow .15s;
+      &:hover { background: #d2e3fc; box-shadow: 0 1px 4px rgba(26,115,232,.2); }
     }
     .stepper {
       display: flex;
@@ -721,8 +728,12 @@ const STYLE_ICONS: Record<string, string> = {
       justify-content: flex-end;
       gap: 8px;
       margin-top: 24px;
-      padding-top: 20px;
+      padding: 20px 0;
       border-top: 1px solid #e8eaed;
+      position: sticky;
+      bottom: 0;
+      background: #f8f9fa;
+      z-index: 10;
     }
 
     .review-block {
@@ -782,6 +793,34 @@ const STYLE_ICONS: Record<string, string> = {
       margin-top: 10px;
       padding-top: 10px;
       border-top: 1px solid #f1f3f4;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      .setup-nav {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .stepper { flex-wrap: wrap; }
+      .step-label { display: none; }
+      .step-line { width: 20px; }
+      .form-row { grid-template-columns: 1fr; }
+      .style-grid { grid-template-columns: repeat(auto-fill, minmax(90px, 1fr)); }
+      .palette-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
+      .mood-grid { grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); }
+      .furniture-grid { grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); }
+      .review-room-header { flex-wrap: wrap; }
+      .review-dims { margin-left: 36px; width: 100%; }
+    }
+
+    @media (max-width: 480px) {
+      .step-actions {
+        flex-direction: column;
+        .btn { width: 100%; }
+      }
+      .style-grid { grid-template-columns: repeat(3, 1fr); }
+      .palette-grid { grid-template-columns: 1fr; }
+      .mood-grid { grid-template-columns: repeat(2, 1fr); }
     }
   `,
 })
