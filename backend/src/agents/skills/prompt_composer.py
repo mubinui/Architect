@@ -11,8 +11,17 @@ class PromptComposer:
         spatial_analysis: str,
         color_directive: str,
         style_guidance: str,
+        catalog_descriptions: list[str] | None = None,
     ) -> str:
         furniture_desc = ", ".join(room.furniture_preferences) if room.furniture_preferences else "style-appropriate furnishings"
+
+        # Append catalog item descriptions to furniture/notes
+        notes_parts = [room.notes] if room.notes else []
+        if catalog_descriptions:
+            notes_parts.append(
+                "SELECTED PRODUCTS (incorporate these specific items into the design): "
+                + "; ".join(catalog_descriptions)
+            )
 
         return ROOM_PROMPT_TEMPLATE.format(
             style=context.style.value.replace("_", " ").title(),
@@ -31,5 +40,5 @@ class PromptComposer:
             color_directive=color_directive,
             style_guidance=style_guidance,
             furniture=furniture_desc,
-            notes=room.notes or "None",
+            notes="; ".join(notes_parts) if notes_parts else "None",
         )

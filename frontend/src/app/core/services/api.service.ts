@@ -70,27 +70,37 @@ export class ApiService {
 
   generateRoom(
     projectId: string,
-    roomId: string
+    roomId: string,
+    referenceImages: string[] = [],
   ): Observable<RoomGenerationResult> {
     return this.http.post<RoomGenerationResult>(
       `${this.baseUrl}/projects/${projectId}/rooms/${roomId}/generate`,
-      {}
+      { reference_images: referenceImages }
     );
   }
 
   modifyRoom(
     projectId: string,
     roomId: string,
-    modificationPrompt: string
+    modificationPrompt: string,
+    referenceImages: string[] = [],
   ): Observable<RoomGenerationResult> {
     return this.http.post<RoomGenerationResult>(
       `${this.baseUrl}/projects/${projectId}/rooms/${roomId}/modify`,
-      { modification_prompt: modificationPrompt }
+      {
+        modification_prompt: modificationPrompt,
+        reference_images: referenceImages,
+      }
     );
   }
 
   // Styles
   getStyles(): Observable<StyleOption[]> {
     return this.http.get<StyleOption[]>(`${this.baseUrl}/styles`);
+  }
+
+  // Scraper
+  scanWebsite(url: string): Observable<{ images: string[] }> {
+    return this.http.get<{ images: string[] }>(`${this.baseUrl}/scraper/scan?url=${encodeURIComponent(url)}`);
   }
 }

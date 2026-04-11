@@ -31,7 +31,9 @@ class DesignOrchestrator:
         self._semaphore = asyncio.Semaphore(settings.max_concurrent_generations)
 
     async def generate_room(
-        self, room: RoomSpec, context: DesignContext
+        self, room: RoomSpec, context: DesignContext,
+        catalog_descriptions: list[str] | None = None,
+        reference_images: list[str] | None = None,
     ) -> RoomResult:
         async with self._semaphore:
             # Stage 1: Skill pipeline — analyze and enrich
@@ -46,6 +48,7 @@ class DesignOrchestrator:
                 spatial_analysis=spatial_analysis,
                 color_directive=color_directive,
                 style_guidance=style_guidance,
+                catalog_descriptions=catalog_descriptions,
             )
 
             # Stage 3: Gemini enrichment — transform to architect-quality prompt
@@ -53,6 +56,7 @@ class DesignOrchestrator:
                 model=self.settings.gemini_model,
                 system_prompt=SYSTEM_PROMPT,
                 user_prompt=composed_prompt,
+                reference_images=reference_images,
             )
 
             # Stage 4: Consistency guard — validate enriched prompt
@@ -76,6 +80,7 @@ class DesignOrchestrator:
                     model=self.settings.gemini_model,
                     system_prompt=SYSTEM_PROMPT + "\n\nPREVIOUS ATTEMPT HAD STYLE CONTRADICTIONS. Be MORE strict about adhering to the design context.",
                     user_prompt=composed_prompt,
+                    reference_images=reference_images,
                 )
                 _, validated_prompt, _ = self.guard.validate(enriched_prompt, context)
 
@@ -83,6 +88,7 @@ class DesignOrchestrator:
             image_base64 = await self.client.generate_image(
                 model=self.settings.nano_banana_model,
                 prompt=validated_prompt,
+                reference_images=reference_images,
             )
 
             return RoomResult(
@@ -97,6 +103,7 @@ class DesignOrchestrator:
         context: DesignContext,
         original_result: RoomResult,
         modification_prompt: str,
+        reference_images: list[str] | None = None,
     ) -> RoomResult:
         async with self._semaphore:
             # Check modification for style coherence
@@ -118,6 +125,7 @@ class DesignOrchestrator:
                 model=self.settings.gemini_model,
                 system_prompt=MODIFICATION_SYSTEM_PROMPT,
                 user_prompt=mod_request,
+                reference_images=reference_images,
             )
 
             # Validate modified prompt
@@ -131,6 +139,7 @@ class DesignOrchestrator:
             image_base64 = await self.client.generate_image(
                 model=self.settings.nano_banana_model,
                 prompt=validated_prompt,
+                reference_images=reference_images,
             )
 
             new_history = original_result.modification_history + [modification_prompt]

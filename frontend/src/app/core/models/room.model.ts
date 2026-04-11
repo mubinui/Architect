@@ -25,6 +25,7 @@ export interface RoomSpec {
   dimensions: Dimensions;
   color_preferences: string[];
   furniture_preferences: string[];
+  selected_catalog_items: string[];
   notes: string;
 }
 

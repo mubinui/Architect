@@ -29,4 +29,11 @@ export const routes: Routes = [
         (m) => m.RoomDetailComponent
       ),
   },
+  {
+    path: 'catalog',
+    loadComponent: () =>
+      import('./features/catalog/catalog-browser.component').then(
+        (m) => m.CatalogBrowserComponent
+      ),
+  },
 ];

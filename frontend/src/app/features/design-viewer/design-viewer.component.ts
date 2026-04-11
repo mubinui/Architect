@@ -105,7 +105,7 @@ import { ProjectStore } from '../../core/store/project.store';
                   <span class="room-name">{{ room.name }}</span>
                   <span class="room-type">{{ room.room_type.replace('_', ' ') }}</span>
                 </div>
-                <span class="room-dims">{{ room.dimensions.width }}×{{ room.dimensions.length }}m</span>
+                <span class="room-dims">{{ room.dimensions.width }}×{{ room.dimensions.length }} ft</span>
               </div>
             </div>
           }

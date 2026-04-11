@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from src.config import get_settings
-from src.routers import projects, rooms, generation
+from src.routers import projects, rooms, generation, catalog, scraper
 
 _settings = get_settings()
 
@@ -23,6 +23,8 @@ app.add_middleware(
 app.include_router(projects.router, prefix="/api")
 app.include_router(rooms.router, prefix="/api")
 app.include_router(generation.router, prefix="/api")
+app.include_router(catalog.router)
+app.include_router(scraper.router, prefix="/api")
 
 
 @app.get("/api/health")

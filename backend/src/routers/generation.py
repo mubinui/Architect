@@ -1,3 +1,4 @@
+import asyncio
 from datetime import datetime, timezone
 
 from fastapi import APIRouter, Depends, HTTPException
@@ -10,10 +11,30 @@ from src.models.generation import (
 )
 from src.models.room import RoomResult
 from src.storage.json_store import JsonProjectStore
+from src.storage.catalog_store import CatalogStore
 from src.agents.orchestrator import DesignOrchestrator
-from src.dependencies import get_store, get_orchestrator
+from src.dependencies import get_store, get_orchestrator, get_catalog_store
 
 router = APIRouter(tags=["generation"])
+
+
+def _get_catalog_descriptions(room, catalog: CatalogStore) -> list[str] | None:
+    """Look up catalog item descriptions for a room's selected items."""
+    if not room.selected_catalog_items:
+        return None
+    items = catalog.get_items_by_ids(room.selected_catalog_items)
+    if not items:
+        return None
+    return [f"{item.name}: {item.description}" for item in items]
+
+
+def _get_reference_images(room, catalog: CatalogStore) -> list[str] | None:
+    """Collect reference images from a room's selected catalog items."""
+    if not room.selected_catalog_items:
+        return None
+    items = catalog.get_items_by_ids(room.selected_catalog_items)
+    images = [item.image_base64 for item in items if item.image_base64]
+    return images if images else None
 
 
 @router.post("/projects/{project_id}/generate", response_model=GenerationResponse)
@@ -22,6 +43,7 @@ async def generate_rooms(
     req: GenerateRequest = GenerateRequest(),
     store: JsonProjectStore = Depends(get_store),
     orchestrator: DesignOrchestrator = Depends(get_orchestrator),
+    catalog: CatalogStore = Depends(get_catalog_store),
 ):
     project = store.load(project_id)
     if not project:
@@ -38,8 +60,20 @@ async def generate_rooms(
     else:
         rooms_to_gen = project.rooms
 
-    # Run batch generation
-    raw_results = await orchestrator.generate_batch(rooms_to_gen, project.design_context)
+    # Run batch generation (with catalog items + reference images)
+    async def gen_with_catalog(room):
+        cat_descs = _get_catalog_descriptions(room, catalog)
+        ref_imgs = _get_reference_images(room, catalog) or []
+        all_ref_imgs = ref_imgs + req.reference_images
+        return await orchestrator.generate_room(
+            room, project.design_context,
+            catalog_descriptions=cat_descs,
+            reference_images=all_ref_imgs if all_ref_imgs else None,
+        )
+
+
+    tasks = [gen_with_catalog(room) for room in rooms_to_gen]
+    raw_results = await asyncio.gather(*tasks, return_exceptions=True)
 
     results = []
     successful = 0
@@ -90,8 +124,10 @@ async def generate_rooms(
 async def generate_single_room(
     project_id: str,
     room_id: str,
+    req: GenerateRequest = GenerateRequest(),
     store: JsonProjectStore = Depends(get_store),
     orchestrator: DesignOrchestrator = Depends(get_orchestrator),
+    catalog: CatalogStore = Depends(get_catalog_store),
 ):
     project = store.load(project_id)
     if not project:
@@ -102,7 +138,14 @@ async def generate_single_room(
         raise HTTPException(status_code=404, detail="Room not found")
 
     try:
-        result = await orchestrator.generate_room(room, project.design_context)
+        cat_descs = _get_catalog_descriptions(room, catalog)
+        ref_imgs = _get_reference_images(room, catalog) or []
+        all_ref_imgs = ref_imgs + req.reference_images
+        result = await orchestrator.generate_room(
+            room, project.design_context,
+            catalog_descriptions=cat_descs,
+            reference_images=all_ref_imgs if all_ref_imgs else None,
+        )
         project.results[room_id] = result
         project.updated_at = datetime.now(timezone.utc)
         store.save(project)
@@ -126,6 +169,7 @@ async def modify_room(
     req: ModifyRequest,
     store: JsonProjectStore = Depends(get_store),
     orchestrator: DesignOrchestrator = Depends(get_orchestrator),
+    catalog: CatalogStore = Depends(get_catalog_store),
 ):
     project = store.load(project_id)
     if not project:
@@ -143,11 +187,14 @@ async def modify_room(
         )
 
     try:
+        ref_imgs = _get_reference_images(room, catalog) or []
+        all_ref_imgs = ref_imgs + req.reference_images
         result = await orchestrator.modify_room(
             room=room,
             context=project.design_context,
             original_result=original_result,
             modification_prompt=req.modification_prompt,
+            reference_images=all_ref_imgs if all_ref_imgs else None,
         )
         project.results[room_id] = result
         project.updated_at = datetime.now(timezone.utc)

@@ -64,6 +64,18 @@ export class ProjectStore {
     }
   }
 
+  async updateRoom(roomId: string, roomData: any): Promise<void> {
+    const project = this.currentProject();
+    if (!project) return;
+    try {
+      await firstValueFrom(this.api.updateRoom(project.id, roomId, roomData));
+      // Refresh project to get updated room state
+      await this.loadProject(project.id);
+    } catch (e: any) {
+      this.error.set(e.message);
+    }
+  }
+
   async generateAll(): Promise<GenerationResponse | null> {
     const project = this.currentProject();
     if (!project) return null;
@@ -97,7 +109,7 @@ export class ProjectStore {
     }
   }
 
-  async generateRoom(roomId: string): Promise<RoomGenerationResult | null> {
+  async generateRoom(roomId: string, referenceImages: string[] = []): Promise<RoomGenerationResult | null> {
     const project = this.currentProject();
     if (!project) return null;
 
@@ -109,7 +121,7 @@ export class ProjectStore {
 
     try {
       const result = await firstValueFrom(
-        this.api.generateRoom(project.id, roomId)
+        this.api.generateRoom(project.id, roomId, referenceImages)
       );
       this.generationStatus.update((m) => {
         const newMap = new Map(m);
@@ -131,7 +143,8 @@ export class ProjectStore {
 
   async modifyRoom(
     roomId: string,
-    prompt: string
+    prompt: string,
+    referenceImages: string[] = [],
   ): Promise<RoomGenerationResult | null> {
     const project = this.currentProject();
     if (!project) return null;
@@ -144,7 +157,7 @@ export class ProjectStore {
 
     try {
       const result = await firstValueFrom(
-        this.api.modifyRoom(project.id, roomId, prompt)
+        this.api.modifyRoom(project.id, roomId, prompt, referenceImages)
       );
       this.generationStatus.update((m) => {
         const newMap = new Map(m);

@@ -1,0 +1,12 @@
+[
+  {
+    "id": "e31d8319-fbae-4aa0-bb3c-544f172aea44",
+    "name": "Hatil Bed",
+    "description": "Wooden bed",
+    "category": "furniture",
+    "shop_id": "my_collection",
+    "image_base64": "https://hatil-image.s3.ap-southeast-1.amazonaws.com/Nop_Image/HATIL%20Bed%20Epiphany-115.jpg",
+    "tags": [],
+    "is_custom": true
+  }
+]

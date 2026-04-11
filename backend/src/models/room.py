@@ -19,9 +19,9 @@ class RoomType(str, Enum):
 
 
 class Dimensions(BaseModel):
-    width: float = Field(gt=0, description="Width in meters")
-    height: float = Field(gt=0, default=3.0, description="Ceiling height in meters")
-    length: float = Field(gt=0, description="Length in meters")
+    width: float = Field(gt=0, description="Width in feet")
+    height: float = Field(gt=0, default=9.0, description="Ceiling height in feet")
+    length: float = Field(gt=0, description="Length in feet")
 
 
 class RoomSpec(BaseModel):
@@ -31,6 +31,7 @@ class RoomSpec(BaseModel):
     dimensions: Dimensions
     color_preferences: list[str] = []
     furniture_preferences: list[str] = []
+    selected_catalog_items: list[str] = []
     notes: str = ""
 
 

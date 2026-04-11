@@ -9,6 +9,8 @@ import {
   RoomType,
   CreateProjectRequest,
 } from '../../core/models';
+import { COLOR_PALETTES, MOOD_PRESETS, ColorPalette, MoodPreset } from '../../core/data/design-presets';
+import { getFurnitureForRoom, FurnitureItem } from '../../core/data/furniture-presets';
 
 interface RoomForm {
   name: string;
@@ -16,10 +18,7 @@ interface RoomForm {
   width: number;
   height: number;
   length: number;
-  colorInput: string;
-  colors: string[];
-  furnitureInput: string;
-  furniture: string[];
+  selectedFurniture: string[];
   notes: string;
 }
 
@@ -37,6 +36,8 @@ const STYLE_ICONS: Record<string, string> = {
   coastal: `<path d="M2 17C6 13 10 17 14 13C18 9 20 13 22 11" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" fill="none"/><path d="M2 21H22" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/>`,
   rustic: `<rect x="3" y="8" width="18" height="13" rx="1" stroke="currentColor" stroke-width="1.5"/><path d="M3 8L12 3L21 8" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>`,
 };
+
+
 
 @Component({
   selector: 'app-project-setup',
@@ -70,7 +71,7 @@ const STYLE_ICONS: Record<string, string> = {
         <div class="step-panel">
           <div class="step-header">
             <h2>Design Style</h2>
-            <p>Choose the visual language for your project</p>
+            <p>Pick the look & feel for your project</p>
           </div>
 
           <div class="form-field">
@@ -95,33 +96,51 @@ const STYLE_ICONS: Record<string, string> = {
 
           <div class="divider"></div>
 
-          <div class="form-row">
-            <div class="form-field">
-              <label class="form-field__label">Primary Colors</label>
-              <input [(ngModel)]="primaryColors" placeholder="warm white, oak brown, soft gray" />
-            </div>
-            <div class="form-field">
-              <label class="form-field__label">Accent Colors</label>
-              <input [(ngModel)]="accentColors" placeholder="brushed gold, forest green" />
-            </div>
+          <!-- Color Palette Selector -->
+          <label class="form-field__label">Color Palette</label>
+          <p class="form-hint">Choose a color scheme for your space</p>
+          <div class="palette-grid">
+            @for (p of palettes; track p.id) {
+              <button
+                type="button"
+                class="palette-card"
+                [class.palette-card--active]="selectedPalette === p.id"
+                (click)="selectedPalette = p.id"
+              >
+                <div class="palette-swatches">
+                  @for (c of p.colors; track c) {
+                    <div class="swatch" [style.backgroundColor]="c"></div>
+                  }
+                </div>
+                <span class="palette-name">{{ p.name }}</span>
+                <span class="palette-desc">{{ p.description }}</span>
+              </button>
+            }
           </div>
-          <div class="form-row">
-            <div class="form-field">
-              <label class="form-field__label">Material Palette</label>
-              <input [(ngModel)]="materials" placeholder="light oak, marble, brushed brass" />
-            </div>
-            <div class="form-field">
-              <label class="form-field__label">Lighting Mood</label>
-              <input [(ngModel)]="lightingMood" placeholder="warm ambient with accent spotlights" />
-            </div>
+
+          <div class="divider"></div>
+
+          <!-- Mood Selector -->
+          <label class="form-field__label">Room Mood</label>
+          <p class="form-hint">How should the space feel?</p>
+          <div class="mood-grid">
+            @for (m of moods; track m.id) {
+              <button
+                type="button"
+                class="mood-card"
+                [class.mood-card--active]="selectedMood === m.id"
+                (click)="selectedMood = m.id"
+              >
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" [innerHTML]="m.icon"></svg>
+                <span class="mood-name">{{ m.name }}</span>
+                <span class="mood-desc">{{ m.description }}</span>
+              </button>
+            }
           </div>
-          <div class="form-field">
-            <label class="form-field__label">Texture Preferences</label>
-            <input [(ngModel)]="textures" placeholder="linen, matte concrete, natural wood grain" />
-          </div>
-          <div class="form-field">
-            <label class="form-field__label">Overall Vision (optional)</label>
-            <textarea [(ngModel)]="overallDescription" placeholder="A cozy modern apartment with warm earth tones..."></textarea>
+
+          <div class="form-field" style="margin-top: 16px">
+            <label class="form-field__label">Any special requests? <span class="optional">(optional)</span></label>
+            <textarea [(ngModel)]="overallDescription" rows="2" placeholder="e.g., I want lots of natural light and plants..."></textarea>
           </div>
 
           <div class="step-actions">
@@ -140,7 +159,7 @@ const STYLE_ICONS: Record<string, string> = {
         <div class="step-panel">
           <div class="step-header">
             <h2>Rooms</h2>
-            <p>Define each room in your space</p>
+            <p>Set up each room — pick furniture by tapping</p>
           </div>
 
           @for (room of rooms; track $index; let i = $index) {
@@ -166,7 +185,7 @@ const STYLE_ICONS: Record<string, string> = {
                 </div>
                 <div class="form-field">
                   <label class="form-field__label">Room Type</label>
-                  <select [(ngModel)]="room.room_type">
+                  <select [(ngModel)]="room.room_type" (ngModelChange)="onRoomTypeChange(i)">
                     @for (t of roomTypes; track t) {
                       <option [value]="t">{{ t.replace('_', ' ') }}</option>
                     }
@@ -174,48 +193,55 @@ const STYLE_ICONS: Record<string, string> = {
                 </div>
               </div>
 
-              <div class="form-row form-row--3">
-                <div class="form-field">
-                  <label class="form-field__label">Width (m)</label>
-                  <input type="number" [(ngModel)]="room.width" min="1" step="0.5" />
+              <!-- Room Size Sliders -->
+              <div class="form-field">
+                <label class="form-field__label">Room Size</label>
+                <div class="slider-group">
+                  <div class="slider-row">
+                    <span class="slider-label">Width</span>
+                    <input type="range" class="slider" min="5" max="40" step="1" [(ngModel)]="room.width" />
+                    <span class="slider-value">{{ room.width }} ft</span>
+                  </div>
+                  <div class="slider-row">
+                    <span class="slider-label">Length</span>
+                    <input type="range" class="slider" min="5" max="50" step="1" [(ngModel)]="room.length" />
+                    <span class="slider-value">{{ room.length }} ft</span>
+                  </div>
+                  <div class="slider-row">
+                    <span class="slider-label">Height</span>
+                    <input type="range" class="slider" min="7" max="20" step="0.5" [(ngModel)]="room.height" />
+                    <span class="slider-value">{{ room.height }} ft</span>
+                  </div>
                 </div>
-                <div class="form-field">
-                  <label class="form-field__label">Length (m)</label>
-                  <input type="number" [(ngModel)]="room.length" min="1" step="0.5" />
-                </div>
-                <div class="form-field">
-                  <label class="form-field__label">Ceiling (m)</label>
-                  <input type="number" [(ngModel)]="room.height" min="2" step="0.1" />
+                <div class="area-display">
+                  Area: <strong>{{ room.width * room.length }} sq ft</strong>
                 </div>
               </div>
 
+              <!-- Furniture Grid -->
               <div class="form-field">
-                <label class="form-field__label">Colors</label>
-                <div class="chip-input">
-                  @for (c of room.colors; track c; let ci = $index) {
-                    <span class="chip">{{ c }}<span class="chip__remove" (click)="room.colors.splice(ci,1)">
-                      <svg width="10" height="10" viewBox="0 0 24 24" fill="none"><path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
-                    </span></span>
+                <label class="form-field__label">Furniture <span class="form-hint-inline">— tap to add / remove</span></label>
+                <div class="furniture-grid">
+                  @for (f of getFurniture(room.room_type); track f.id) {
+                    <button
+                      type="button"
+                      class="furn-card"
+                      [class.furn-card--active]="room.selectedFurniture.includes(f.id)"
+                      (click)="toggleFurniture(room, f.id)"
+                    >
+                      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" [innerHTML]="f.icon"></svg>
+                      <span>{{ f.label }}</span>
+                      @if (room.selectedFurniture.includes(f.id)) {
+                        <div class="furn-check">✓</div>
+                      }
+                    </button>
                   }
-                  <input [(ngModel)]="room.colorInput" placeholder="warm white…" (keydown.enter)="addTag(room,'colors',room.colorInput);room.colorInput=''" />
                 </div>
               </div>
 
               <div class="form-field">
-                <label class="form-field__label">Furniture</label>
-                <div class="chip-input">
-                  @for (f of room.furniture; track f; let fi = $index) {
-                    <span class="chip">{{ f }}<span class="chip__remove" (click)="room.furniture.splice(fi,1)">
-                      <svg width="10" height="10" viewBox="0 0 24 24" fill="none"><path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
-                    </span></span>
-                  }
-                  <input [(ngModel)]="room.furnitureInput" placeholder="king bed…" (keydown.enter)="addTag(room,'furniture',room.furnitureInput);room.furnitureInput=''" />
-                </div>
-              </div>
-
-              <div class="form-field">
-                <label class="form-field__label">Notes</label>
-                <textarea [(ngModel)]="room.notes" placeholder="Any special requirements..."></textarea>
+                <label class="form-field__label">Notes <span class="optional">(optional)</span></label>
+                <textarea [(ngModel)]="room.notes" rows="2" placeholder="Any special requirements..."></textarea>
               </div>
             </div>
           }
@@ -244,7 +270,7 @@ const STYLE_ICONS: Record<string, string> = {
         <div class="step-panel">
           <div class="step-header">
             <h2>Review & Create</h2>
-            <p>Confirm your project details before generating</p>
+            <p>Everything look good? Hit create to start designing!</p>
           </div>
 
           <div class="review-block card">
@@ -256,18 +282,19 @@ const STYLE_ICONS: Record<string, string> = {
               <span class="review-label">Style</span>
               <span class="badge badge--blue">{{ selectedStyle.replace('_',' ') }}</span>
             </div>
-            @if (primaryColors) {
-              <div class="review-row">
-                <span class="review-label">Colors</span>
-                <span class="review-value">{{ primaryColors }}</span>
+            <div class="review-row">
+              <span class="review-label">Colors</span>
+              <div class="review-swatches">
+                @for (c of getSelectedPalette().colors; track c) {
+                  <div class="swatch-sm" [style.backgroundColor]="c"></div>
+                }
+                <span class="review-value" style="margin-left:6px">{{ getSelectedPalette().name }}</span>
               </div>
-            }
-            @if (materials) {
-              <div class="review-row">
-                <span class="review-label">Materials</span>
-                <span class="review-value">{{ materials }}</span>
-              </div>
-            }
+            </div>
+            <div class="review-row">
+              <span class="review-label">Mood</span>
+              <span class="review-value">{{ getSelectedMood().name }}</span>
+            </div>
           </div>
 
           <h3 class="section-title" style="margin-top:24px">{{ rooms.length }} Room{{ rooms.length !== 1 ? 's' : '' }}</h3>
@@ -279,8 +306,15 @@ const STYLE_ICONS: Record<string, string> = {
                   <strong>{{ r.name }}</strong>
                   <span class="badge badge--gray" style="margin-left:8px">{{ r.room_type.replace('_',' ') }}</span>
                 </div>
-                <span class="review-dims">{{ r.width }}m × {{ r.length }}m × {{ r.height }}m</span>
+                <span class="review-dims">{{ r.width }}×{{ r.length }} ft · {{ r.width * r.length }} sq ft</span>
               </div>
+              @if (r.selectedFurniture.length) {
+                <div class="review-furniture">
+                  @for (fid of r.selectedFurniture; track fid) {
+                    <span class="chip">{{ getFurnitureLabel(r.room_type, fid) }}</span>
+                  }
+                </div>
+              }
             </div>
           }
 
@@ -364,6 +398,22 @@ const STYLE_ICONS: Record<string, string> = {
       p { font-size: 14px; color: #5f6368; margin: 0; }
     }
 
+    .form-hint {
+      font-size: 12px;
+      color: #9aa0a6;
+      margin: 0 0 10px;
+    }
+    .form-hint-inline {
+      font-size: 12px;
+      color: #9aa0a6;
+      font-weight: 400;
+    }
+    .optional {
+      font-size: 11px;
+      color: #9aa0a6;
+      font-weight: 400;
+    }
+
     .style-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
@@ -399,6 +449,213 @@ const STYLE_ICONS: Record<string, string> = {
         border-color: #bdc1c6;
         background: #f8f9fa;
       }
+    }
+
+    /* ── Palette selector ── */
+    .palette-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 10px;
+      margin-bottom: 4px;
+    }
+    .palette-card {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      padding: 14px;
+      background: #fff;
+      border: 1.5px solid #e8eaed;
+      border-radius: 10px;
+      cursor: pointer;
+      text-align: left;
+      transition: border-color .15s, background .15s, box-shadow .15s;
+      &--active {
+        border-color: #1a73e8;
+        background: #f0f4ff;
+        box-shadow: 0 0 0 3px rgba(26,115,232,.12);
+      }
+      &:hover:not(.palette-card--active) {
+        border-color: #bdc1c6;
+        background: #f8f9fa;
+      }
+    }
+    .palette-swatches {
+      display: flex;
+      gap: 4px;
+    }
+    .swatch {
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      border: 2px solid #fff;
+      box-shadow: 0 0 0 1px rgba(0,0,0,.08);
+    }
+    .palette-name {
+      font-size: 13px;
+      font-weight: 600;
+      color: #202124;
+    }
+    .palette-desc {
+      font-size: 11px;
+      color: #5f6368;
+      line-height: 1.3;
+    }
+
+    /* ── Mood selector ── */
+    .mood-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 10px;
+      margin-bottom: 4px;
+    }
+    .mood-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      padding: 16px 10px;
+      background: #fff;
+      border: 1.5px solid #e8eaed;
+      border-radius: 10px;
+      cursor: pointer;
+      text-align: center;
+      transition: border-color .15s, background .15s, box-shadow .15s;
+      svg { color: #9aa0a6; transition: color .15s; }
+      &--active {
+        border-color: #1a73e8;
+        background: #f0f4ff;
+        box-shadow: 0 0 0 3px rgba(26,115,232,.12);
+        svg { color: #1a73e8; }
+      }
+      &:hover:not(.mood-card--active) {
+        border-color: #bdc1c6;
+        background: #f8f9fa;
+      }
+    }
+    .mood-name {
+      font-size: 12px;
+      font-weight: 600;
+      color: #202124;
+    }
+    .mood-desc {
+      font-size: 10px;
+      color: #5f6368;
+      line-height: 1.3;
+    }
+
+    /* ── Room Size Sliders ── */
+    .slider-group {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .slider-row {
+      display: grid;
+      grid-template-columns: 50px 1fr 60px;
+      align-items: center;
+      gap: 12px;
+    }
+    .slider-label {
+      font-size: 12px;
+      font-weight: 500;
+      color: #5f6368;
+    }
+    .slider-value {
+      font-size: 12px;
+      font-weight: 600;
+      color: #1a73e8;
+      text-align: right;
+    }
+    .slider {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 100%;
+      height: 4px;
+      border-radius: 2px;
+      background: #e8eaed;
+      outline: none;
+      &::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        background: #1a73e8;
+        cursor: pointer;
+        border: 2px solid #fff;
+        box-shadow: 0 1px 4px rgba(0,0,0,.2);
+        transition: transform .1s;
+        &:hover { transform: scale(1.15); }
+      }
+      &::-moz-range-thumb {
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        background: #1a73e8;
+        cursor: pointer;
+        border: 2px solid #fff;
+        box-shadow: 0 1px 4px rgba(0,0,0,.2);
+      }
+    }
+    .area-display {
+      margin-top: 8px;
+      padding: 8px 12px;
+      background: #f0f4ff;
+      border-radius: 6px;
+      font-size: 13px;
+      color: #3c4043;
+      strong { color: #1a73e8; }
+    }
+
+    /* ── Furniture Grid ── */
+    .furniture-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+      gap: 8px;
+    }
+    .furn-card {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+      padding: 12px 6px 10px;
+      background: #fff;
+      border: 1.5px solid #e8eaed;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: border-color .15s, background .15s, box-shadow .15s;
+      svg { color: #9aa0a6; transition: color .15s; }
+      span {
+        font-size: 10px;
+        font-weight: 500;
+        color: #5f6368;
+        text-align: center;
+        line-height: 1.2;
+      }
+      &--active {
+        border-color: #1a73e8;
+        background: #f0f4ff;
+        box-shadow: 0 0 0 2px rgba(26,115,232,.1);
+        svg { color: #1a73e8; }
+        span { color: #1a73e8; }
+      }
+      &:hover:not(.furn-card--active) {
+        border-color: #bdc1c6;
+        background: #f8f9fa;
+      }
+    }
+    .furn-check {
+      position: absolute;
+      top: 4px; right: 4px;
+      width: 16px; height: 16px;
+      background: #1a73e8;
+      color: #fff;
+      border-radius: 50%;
+      font-size: 9px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
     }
 
     .form-row {
@@ -438,35 +695,6 @@ const STYLE_ICONS: Record<string, string> = {
       font-size: 14px;
       font-weight: 500;
       color: #202124;
-    }
-
-    .chip-input {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 6px;
-      padding: 6px 10px;
-      border: 1px solid #dadce0;
-      border-radius: 4px;
-      background: #fff;
-      min-height: 40px;
-      transition: border-color .15s, box-shadow .15s;
-      &:focus-within {
-        border-color: #1a73e8;
-        box-shadow: 0 0 0 2px rgba(26,115,232,.15);
-      }
-      input {
-        flex: 1;
-        min-width: 100px;
-        border: none;
-        outline: none;
-        font-size: 14px;
-        color: #202124;
-        background: transparent;
-        height: 26px;
-        padding: 0;
-        &::placeholder { color: #bdc1c6; }
-      }
     }
 
     .add-room-btn {
@@ -521,6 +749,17 @@ const STYLE_ICONS: Record<string, string> = {
       font-size: 14px;
       color: #202124;
     }
+    .review-swatches {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .swatch-sm {
+      width: 18px; height: 18px;
+      border-radius: 50%;
+      border: 1.5px solid #fff;
+      box-shadow: 0 0 0 1px rgba(0,0,0,.08);
+    }
     .review-room {
       margin-bottom: 8px;
       padding: 14px 20px;
@@ -536,6 +775,14 @@ const STYLE_ICONS: Record<string, string> = {
       font-size: 12px;
       color: #9aa0a6;
     }
+    .review-furniture {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid #f1f3f4;
+    }
   `,
 })
 export class ProjectSetupComponent {
@@ -546,14 +793,15 @@ export class ProjectSetupComponent {
 
   projectName = '';
   selectedStyle: DesignStyle = 'modern';
-  primaryColors = '';
-  accentColors = '';
-  materials = '';
-  lightingMood = '';
-  textures = '';
+  selectedPalette = 'neutral_classic';
+  selectedMood = 'bright_airy';
   overallDescription = '';
 
+  palettes = COLOR_PALETTES;
+  moods = MOOD_PRESETS;
+
   rooms: RoomForm[] = [this.blankRoom()];
+
 
   styles: DesignStyle[] = [
     'modern','minimalist','industrial','scandinavian','bohemian',
@@ -573,46 +821,79 @@ export class ProjectSetupComponent {
   }
 
   blankRoom(): RoomForm {
-    return { name:'', room_type:'bedroom', width:4, height:3, length:5,
-             colorInput:'', colors:[], furnitureInput:'', furniture:[], notes:'' };
+    return { name:'', room_type:'bedroom', width:13, height:9, length:16,
+             selectedFurniture:['king_bed','nightstand'], notes:'' };
   }
 
   addRoom() { this.rooms.push(this.blankRoom()); }
   removeRoom(i: number) { this.rooms.splice(i, 1); }
 
-  addTag(room: RoomForm, field: 'colors'|'furniture', value: string) {
-    const v = value.trim();
-    if (v && !room[field].includes(v)) room[field].push(v);
+  onRoomTypeChange(i: number) {
+    // Pre-select the first 2 essential furniture items for the new room type
+    const items = getFurnitureForRoom(this.rooms[i].room_type);
+    const essentials = items.filter(f => f.category === 'essentials').slice(0, 2);
+    this.rooms[i].selectedFurniture = essentials.map(f => f.id);
+  }
+
+  getFurniture(roomType: string): FurnitureItem[] {
+    return getFurnitureForRoom(roomType);
+  }
+
+  toggleFurniture(room: RoomForm, fid: string) {
+    const idx = room.selectedFurniture.indexOf(fid);
+    if (idx >= 0) {
+      room.selectedFurniture.splice(idx, 1);
+    } else {
+      room.selectedFurniture.push(fid);
+    }
+  }
+
+  getFurnitureLabel(roomType: string, fid: string): string {
+    const items = getFurnitureForRoom(roomType);
+    return items.find(f => f.id === fid)?.label ?? fid;
+  }
+
+
+
+  getSelectedPalette(): ColorPalette {
+    return this.palettes.find(p => p.id === this.selectedPalette) ?? this.palettes[0];
+  }
+
+  getSelectedMood(): MoodPreset {
+    return this.moods.find(m => m.id === this.selectedMood) ?? this.moods[0];
   }
 
   roomsValid(): boolean {
     return this.rooms.every(r => r.name.trim() && r.width > 0 && r.length > 0 && r.height > 0);
   }
 
-  private list(s: string): string[] {
-    return s.split(',').map(x => x.trim()).filter(Boolean);
-  }
-
   async submit() {
     this.creating.set(true);
+    const palette = this.getSelectedPalette();
+    const mood = this.getSelectedMood();
+
     const ctx: DesignContext = {
       style: this.selectedStyle,
-      primary_colors: this.list(this.primaryColors),
-      accent_colors: this.list(this.accentColors),
-      material_palette: this.list(this.materials),
-      lighting_mood: this.lightingMood,
-      texture_preferences: this.list(this.textures),
-      overall_description: this.overallDescription,
+      primary_colors: [palette.promptKeywords],
+      accent_colors: [],
+      material_palette: [],
+      lighting_mood: mood.promptKeywords,
+      texture_preferences: [],
+      overall_description: `${palette.name} color palette. ${mood.name} atmosphere. ${this.overallDescription}`.trim(),
     };
-    const roomSpecs: RoomSpec[] = this.rooms.map(r => ({
-      id: crypto.randomUUID(),
-      name: r.name,
-      room_type: r.room_type,
-      dimensions: { width: r.width, height: r.height, length: r.length },
-      color_preferences: r.colors,
-      furniture_preferences: r.furniture,
-      notes: r.notes,
-    }));
+    const roomSpecs: RoomSpec[] = this.rooms.map(r => {
+      const furnitureLabels = r.selectedFurniture.map(fid => this.getFurnitureLabel(r.room_type, fid));
+      return {
+        id: crypto.randomUUID(),
+        name: r.name,
+        room_type: r.room_type,
+        dimensions: { width: r.width, height: r.height, length: r.length },
+        color_preferences: [],
+        furniture_preferences: furnitureLabels,
+        selected_catalog_items: [],
+        notes: r.notes,
+      };
+    });
     const req: CreateProjectRequest = { name: this.projectName, design_context: ctx, rooms: roomSpecs };
     try {
       const project = await this.store.createProject(req);

@@ -1,0 +1,106 @@
+[
+  {
+    "id": "modern_living",
+    "name": "Modern Living Co.",
+    "description": "Contemporary furniture & decor for modern spaces",
+    "logo_emoji": "🪑",
+    "items": [
+      {"id": "ml_sofa_01", "name": "Oslo Sectional Sofa", "description": "L-shaped modular sectional in premium bouclé fabric, warm beige tone, clean geometric lines with brushed steel legs", "category": "furniture", "shop_id": "modern_living", "tags": ["sofa", "sectional", "modern", "beige"], "image_base64": ""},
+      {"id": "ml_table_01", "name": "Zen Coffee Table", "description": "Oval coffee table with white marble top and matte black powder-coated steel base, minimalist design", "category": "furniture", "shop_id": "modern_living", "tags": ["table", "coffee table", "marble", "modern"], "image_base64": ""},
+      {"id": "ml_chair_01", "name": "Eero Lounge Chair", "description": "Mid-century inspired lounge chair with walnut shell frame and teal velvet cushion", "category": "furniture", "shop_id": "modern_living", "tags": ["chair", "lounge", "mid-century", "velvet"], "image_base64": ""},
+      {"id": "ml_shelf_01", "name": "Grid Wall Shelf", "description": "Asymmetric open wall shelving unit in light oak with black metal frame, 6 compartments", "category": "furniture", "shop_id": "modern_living", "tags": ["shelf", "bookshelf", "oak", "modern"], "image_base64": ""},
+      {"id": "ml_desk_01", "name": "Studio Work Desk", "description": "Solid walnut desk with integrated cable management, leather desk pad, and brass drawer pulls", "category": "furniture", "shop_id": "modern_living", "tags": ["desk", "office", "walnut", "modern"], "image_base64": ""},
+      {"id": "ml_bed_01", "name": "Cloud Platform Bed", "description": "Low-profile platform bed frame in light oak with padded boucle headboard, floating design", "category": "furniture", "shop_id": "modern_living", "tags": ["bed", "platform", "oak", "modern"], "image_base64": ""},
+      {"id": "ml_side_01", "name": "Pebble Side Table", "description": "Organic-shaped side table in solid white travertine stone, smooth rounded edges", "category": "furniture", "shop_id": "modern_living", "tags": ["table", "side table", "stone", "organic"], "image_base64": ""},
+      {"id": "ml_tv_01", "name": "Float Media Console", "description": "Wall-mounted media console in matte black oak with push-open doors and brass accent strip", "category": "furniture", "shop_id": "modern_living", "tags": ["tv unit", "media", "oak", "modern"], "image_base64": ""},
+      {"id": "ml_dining_01", "name": "Monolith Dining Table", "description": "Solid oak dining table for 6-8 with thick slab top and angular trestle base, natural grain finish", "category": "furniture", "shop_id": "modern_living", "tags": ["table", "dining", "oak", "natural"], "image_base64": ""},
+      {"id": "ml_chair_02", "name": "Arc Dining Chair", "description": "Sculptural dining chair with continuous curved plywood shell in natural ash, woven cane backrest", "category": "furniture", "shop_id": "modern_living", "tags": ["chair", "dining", "cane", "modern"], "image_base64": ""},
+      {"id": "ml_planter_01", "name": "Terrace Floor Planter", "description": "Large ribbed concrete floor planter in charcoal gray, 24 inches tall, with drainage tray", "category": "decor", "shop_id": "modern_living", "tags": ["planter", "concrete", "decor"], "image_base64": ""},
+      {"id": "ml_mirror_01", "name": "Arch Floor Mirror", "description": "Full-length arched mirror with thin brass frame, 72 inches tall, leaning design", "category": "decor", "shop_id": "modern_living", "tags": ["mirror", "brass", "arch", "decor"], "image_base64": ""}
+    ]
+  },
+  {
+    "id": "heritage_tiles",
+    "name": "Heritage Tiles",
+    "description": "Artisan floor & wall tiles for every style",
+    "logo_emoji": "🧱",
+    "items": [
+      {"id": "ht_marble_01", "name": "Calacatta Gold Floor Tile", "description": "Large format 24x24 inch polished Calacatta Gold marble tile with warm golden veining on white base", "category": "tiles", "shop_id": "heritage_tiles", "tags": ["marble", "floor", "calacatta", "white", "gold"], "image_base64": ""},
+      {"id": "ht_subway_01", "name": "Classic Subway Tile", "description": "3x6 inch glossy white ceramic subway tile with beveled edge, classic kitchen and bathroom wall tile", "category": "tiles", "shop_id": "heritage_tiles", "tags": ["subway", "wall", "white", "ceramic"], "image_base64": ""},
+      {"id": "ht_zellige_01", "name": "Moroccan Zellige Tile", "description": "Handmade 4x4 inch zellige tile in sage green with characteristic irregular glaze and handcrafted texture", "category": "tiles", "shop_id": "heritage_tiles", "tags": ["zellige", "moroccan", "green", "handmade"], "image_base64": ""},
+      {"id": "ht_hex_01", "name": "Honeycomb Hex Tile", "description": "2-inch hexagonal mosaic tile in matte black porcelain, perfect for bathroom floors", "category": "tiles", "shop_id": "heritage_tiles", "tags": ["hexagon", "mosaic", "black", "bathroom"], "image_base64": ""},
+      {"id": "ht_terrazzo_01", "name": "Venetian Terrazzo Tile", "description": "Large format terrazzo-look porcelain tile with warm neutral chip pattern on cream base, polished finish", "category": "tiles", "shop_id": "heritage_tiles", "tags": ["terrazzo", "floor", "neutral", "polished"], "image_base64": ""},
+      {"id": "ht_wood_01", "name": "French Oak Plank Tile", "description": "8x48 inch wood-look porcelain plank tile in warm honey oak with realistic grain texture", "category": "tiles", "shop_id": "heritage_tiles", "tags": ["wood-look", "plank", "oak", "floor"], "image_base64": ""},
+      {"id": "ht_cement_01", "name": "Artisan Cement Tile", "description": "8x8 inch encaustic cement tile with geometric blue and white Mediterranean pattern", "category": "tiles", "shop_id": "heritage_tiles", "tags": ["cement", "pattern", "blue", "mediterranean"], "image_base64": ""},
+      {"id": "ht_slate_01", "name": "Natural Slate Tile", "description": "12x24 inch natural cleft slate tile in charcoal gray with organic surface texture", "category": "tiles", "shop_id": "heritage_tiles", "tags": ["slate", "natural", "gray", "floor"], "image_base64": ""},
+      {"id": "ht_penny_01", "name": "Penny Round Mosaic", "description": "1-inch penny round porcelain mosaic in matte white, classic vintage bathroom floor", "category": "tiles", "shop_id": "heritage_tiles", "tags": ["penny", "mosaic", "white", "vintage"], "image_base64": ""},
+      {"id": "ht_herring_01", "name": "Herringbone Marble Tile", "description": "1x3 inch Carrara marble herringbone mosaic tile, tumbled finish for backsplash and shower walls", "category": "tiles", "shop_id": "heritage_tiles", "tags": ["herringbone", "marble", "carrara", "mosaic"], "image_base64": ""}
+    ]
+  },
+  {
+    "id": "nordic_home",
+    "name": "Nordic Home",
+    "description": "Scandinavian-inspired furniture with clean lines",
+    "logo_emoji": "🌿",
+    "items": [
+      {"id": "nh_sofa_01", "name": "Bergen Sofa", "description": "Three-seater sofa in light gray linen with tapered birch legs, removable cushions, Scandinavian design", "category": "furniture", "shop_id": "nordic_home", "tags": ["sofa", "scandinavian", "linen", "gray"], "image_base64": ""},
+      {"id": "nh_table_01", "name": "Stockholm Dining Table", "description": "Round dining table for 4 in solid white oak with splayed legs, natural oil finish, 48 inch diameter", "category": "furniture", "shop_id": "nordic_home", "tags": ["table", "dining", "round", "oak"], "image_base64": ""},
+      {"id": "nh_chair_01", "name": "Wishbone Chair", "description": "Classic Y-back dining chair in natural beechwood with hand-woven paper cord seat", "category": "furniture", "shop_id": "nordic_home", "tags": ["chair", "dining", "beech", "woven"], "image_base64": ""},
+      {"id": "nh_shelf_01", "name": "String Shelf System", "description": "Wall-mounted modular shelf system with white metal side panels and birch plywood shelves, 3 bays", "category": "furniture", "shop_id": "nordic_home", "tags": ["shelf", "modular", "birch", "wall-mounted"], "image_base64": ""},
+      {"id": "nh_bed_01", "name": "Malmö Bed Frame", "description": "Solid pine bed frame with gently curved headboard in natural pine with whitewashed finish", "category": "furniture", "shop_id": "nordic_home", "tags": ["bed", "pine", "scandinavian", "natural"], "image_base64": ""},
+      {"id": "nh_cabinet_01", "name": "Copenhagen Sideboard", "description": "Low sideboard in white-washed ash with sliding doors, turned legs, and interior shelf dividers", "category": "furniture", "shop_id": "nordic_home", "tags": ["sideboard", "storage", "ash", "scandinavian"], "image_base64": ""},
+      {"id": "nh_desk_01", "name": "Fjord Writing Desk", "description": "Compact writing desk in white-oiled oak with single drawer and angled legs, 42 inches wide", "category": "furniture", "shop_id": "nordic_home", "tags": ["desk", "oak", "compact", "scandinavian"], "image_base64": ""},
+      {"id": "nh_armchair_01", "name": "Hygge Armchair", "description": "Cozy armchair with high wingback in oatmeal wool fabric, natural oak frame with curved arms", "category": "furniture", "shop_id": "nordic_home", "tags": ["armchair", "wool", "cozy", "scandinavian"], "image_base64": ""},
+      {"id": "nh_bench_01", "name": "Birch Entryway Bench", "description": "Slim entryway bench in solid birch with slatted seat and integrated shoe shelf below", "category": "furniture", "shop_id": "nordic_home", "tags": ["bench", "entryway", "birch", "storage"], "image_base64": ""},
+      {"id": "nh_nightstand_01", "name": "Drawer Nightstand", "description": "Small nightstand with single drawer in white oak, brass pull, and tapered legs", "category": "furniture", "shop_id": "nordic_home", "tags": ["nightstand", "oak", "brass", "bedroom"], "image_base64": ""}
+    ]
+  },
+  {
+    "id": "luxe_surfaces",
+    "name": "Luxe Surfaces",
+    "description": "Premium marble, stone, and wood finishes",
+    "logo_emoji": "💎",
+    "items": [
+      {"id": "ls_marble_01", "name": "Statuario Marble Slab", "description": "Bookmatched Statuario marble slab with dramatic thick gray veining on bright white base, polished finish", "category": "surfaces", "shop_id": "luxe_surfaces", "tags": ["marble", "statuario", "white", "premium"], "image_base64": ""},
+      {"id": "ls_quartz_01", "name": "Calacatta Quartz Counter", "description": "Engineered quartz countertop in Calacatta style with subtle warm veining, non-porous polished surface", "category": "surfaces", "shop_id": "luxe_surfaces", "tags": ["quartz", "countertop", "calacatta", "kitchen"], "image_base64": ""},
+      {"id": "ls_walnut_01", "name": "Live Edge Walnut Slab", "description": "Natural live-edge black walnut slab, kiln-dried, with rich chocolate to golden grain, for desk or shelf top", "category": "surfaces", "shop_id": "luxe_surfaces", "tags": ["walnut", "wood", "live-edge", "natural"], "image_base64": ""},
+      {"id": "ls_onyx_01", "name": "Backlit Honey Onyx Panel", "description": "Translucent honey onyx stone panel for feature walls, warm amber glow when backlit, 4x8 ft slab", "category": "surfaces", "shop_id": "luxe_surfaces", "tags": ["onyx", "backlit", "feature wall", "luxury"], "image_base64": ""},
+      {"id": "ls_concrete_01", "name": "Polished Concrete Finish", "description": "Micro-topped polished concrete surface in warm gray, industrial chic, for floors and countertops", "category": "surfaces", "shop_id": "luxe_surfaces", "tags": ["concrete", "polished", "gray", "industrial"], "image_base64": ""},
+      {"id": "ls_teak_01", "name": "Reclaimed Teak Paneling", "description": "Reclaimed teak wood wall paneling with weathered patina, mixed warm brown tones, tongue and groove", "category": "surfaces", "shop_id": "luxe_surfaces", "tags": ["teak", "wood", "reclaimed", "wall panel"], "image_base64": ""},
+      {"id": "ls_travertine_01", "name": "Ivory Travertine Counter", "description": "Honed ivory travertine countertop slab with natural pitting filled and sealed, warm cream tone", "category": "surfaces", "shop_id": "luxe_surfaces", "tags": ["travertine", "countertop", "cream", "natural"], "image_base64": ""},
+      {"id": "ls_brick_01", "name": "Exposed Brick Veneer", "description": "Thin-cut reclaimed brick veneer in mixed red and brown tones, industrial loft character wall treatment", "category": "surfaces", "shop_id": "luxe_surfaces", "tags": ["brick", "veneer", "industrial", "wall"], "image_base64": ""}
+    ]
+  },
+  {
+    "id": "ambient_glow",
+    "name": "Ambient Glow",
+    "description": "Designer lighting fixtures & installations",
+    "logo_emoji": "💡",
+    "items": [
+      {"id": "ag_pendant_01", "name": "Globe Cluster Pendant", "description": "3-light pendant cluster with hand-blown frosted glass globes, brushed brass stems at staggered heights", "category": "lighting", "shop_id": "ambient_glow", "tags": ["pendant", "cluster", "glass", "brass"], "image_base64": ""},
+      {"id": "ag_chandelier_01", "name": "Sputnik Chandelier", "description": "Mid-century 18-arm sputnik chandelier in polished brass with frosted globe bulbs, 30 inch diameter", "category": "lighting", "shop_id": "ambient_glow", "tags": ["chandelier", "sputnik", "brass", "mid-century"], "image_base64": ""},
+      {"id": "ag_floor_01", "name": "Arc Floor Lamp", "description": "Overarching floor lamp with marble base, brushed steel arc arm, and linen drum shade, 72 inches tall", "category": "lighting", "shop_id": "ambient_glow", "tags": ["floor lamp", "arc", "marble", "modern"], "image_base64": ""},
+      {"id": "ag_sconce_01", "name": "Brass Wall Sconce", "description": "Minimalist cylindrical wall sconce in brushed brass with frosted glass lens, ambient up-down light", "category": "lighting", "shop_id": "ambient_glow", "tags": ["sconce", "wall", "brass", "minimal"], "image_base64": ""},
+      {"id": "ag_table_01", "name": "Mushroom Table Lamp", "description": "Retro mushroom-shaped table lamp in matte white with opal glass dome shade, soft warm glow", "category": "lighting", "shop_id": "ambient_glow", "tags": ["table lamp", "mushroom", "retro", "white"], "image_base64": ""},
+      {"id": "ag_strip_01", "name": "LED Cove Light Strip", "description": "Recessed warm-white LED strip light for cove and under-cabinet lighting, dimmable 2700K, 10ft roll", "category": "lighting", "shop_id": "ambient_glow", "tags": ["led", "strip", "cove", "recessed"], "image_base64": ""},
+      {"id": "ag_pendant_02", "name": "Rattan Dome Pendant", "description": "Large hand-woven rattan dome pendant light, 20 inch diameter, creates beautiful shadow patterns, natural finish", "category": "lighting", "shop_id": "ambient_glow", "tags": ["pendant", "rattan", "natural", "bohemian"], "image_base64": ""},
+      {"id": "ag_track_01", "name": "Minimal Track Light System", "description": "3-head adjustable track lighting system in matte black, directional spotlight heads, 4 ft rail", "category": "lighting", "shop_id": "ambient_glow", "tags": ["track", "spotlight", "black", "modern"], "image_base64": ""}
+    ]
+  },
+  {
+    "id": "textile_studio",
+    "name": "Textile Studio",
+    "description": "Rugs, curtains, cushions & soft furnishings",
+    "logo_emoji": "🧶",
+    "items": [
+      {"id": "ts_rug_01", "name": "Moroccan Beni Ourain Rug", "description": "Hand-knotted Moroccan Beni Ourain style wool rug in cream with charcoal diamond pattern, 8x10 ft", "category": "textiles", "shop_id": "textile_studio", "tags": ["rug", "moroccan", "wool", "cream"], "image_base64": ""},
+      {"id": "ts_rug_02", "name": "Vintage Persian Rug", "description": "Distressed vintage Persian rug in muted terracotta, navy, and gold tones, 6x9 ft, low pile", "category": "textiles", "shop_id": "textile_studio", "tags": ["rug", "persian", "vintage", "terracotta"], "image_base64": ""},
+      {"id": "ts_curtain_01", "name": "Linen Drape Panel", "description": "Floor-length natural linen curtain panel in soft white, rod pocket top, airy sheer weave, 52x96 inches", "category": "textiles", "shop_id": "textile_studio", "tags": ["curtain", "linen", "white", "sheer"], "image_base64": ""},
+      {"id": "ts_curtain_02", "name": "Velvet Blackout Curtain", "description": "Heavy cotton velvet blackout curtain in deep emerald green, pinch pleat header, 52x108 inches", "category": "textiles", "shop_id": "textile_studio", "tags": ["curtain", "velvet", "green", "blackout"], "image_base64": ""},
+      {"id": "ts_cushion_01", "name": "Bouclé Throw Pillow Set", "description": "Set of 3 textured bouclé throw pillows: cream 20x20, oatmeal 18x18, and taupe lumbar 12x20", "category": "textiles", "shop_id": "textile_studio", "tags": ["pillow", "boucle", "cream", "set"], "image_base64": ""},
+      {"id": "ts_throw_01", "name": "Chunky Knit Throw", "description": "Oversized hand-knit chunky throw blanket in soft merino wool, warm cream color, 50x60 inches", "category": "textiles", "shop_id": "textile_studio", "tags": ["throw", "knit", "wool", "cream"], "image_base64": ""},
+      {"id": "ts_rug_03", "name": "Jute Area Rug", "description": "Natural braided jute area rug with fringe border, neutral golden tone, 8x10 ft, casual texture", "category": "textiles", "shop_id": "textile_studio", "tags": ["rug", "jute", "natural", "braided"], "image_base64": ""},
+      {"id": "ts_tapestry_01", "name": "Woven Wall Hanging", "description": "Handmade macramé wall hanging in natural cotton with wooden dowel, bohemian fiber art, 36x24 inches", "category": "textiles", "shop_id": "textile_studio", "tags": ["wall art", "macrame", "bohemian", "natural"], "image_base64": ""}
+    ]
+  }
+]

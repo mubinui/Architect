@@ -2,6 +2,7 @@ from functools import lru_cache
 
 from src.config import get_settings
 from src.storage.json_store import JsonProjectStore
+from src.storage.catalog_store import CatalogStore
 from src.services.openrouter import OpenRouterClient
 from src.agents.orchestrator import DesignOrchestrator
 
@@ -26,3 +27,8 @@ def get_orchestrator() -> DesignOrchestrator:
         client=get_openrouter_client(),
         settings=get_settings(),
     )
+
+
+@lru_cache
+def get_catalog_store() -> CatalogStore:
+    return CatalogStore(get_settings().data_dir)
