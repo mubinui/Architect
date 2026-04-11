@@ -199,6 +199,7 @@ export interface ToolDragData {
 
     .sections-scroll {
       flex: 1;
+      min-height: 0;
       overflow-y: auto;
       padding: 4px 0;
     }
@@ -397,7 +398,16 @@ export class FloorplanToolbarComponent {
 
   zoomPercent = computed(() => Math.round(this.zoom() * 100));
 
-  constructor(private sanitizer: DomSanitizer) {}
+  constructor(private sanitizer: DomSanitizer) {
+    // Collapse furniture and palette by default so Lock Floorplan is visible
+    const cats = getFurnitureForRoom(this.roomType);
+    const catNames = new Set<string>();
+    for (const item of cats) {
+      catNames.add(item.category.charAt(0).toUpperCase() + item.category.slice(1));
+    }
+    catNames.add('palette');
+    this.collapsedSections.set(catNames);
+  }
 
   // ── Filtered items ──
 
