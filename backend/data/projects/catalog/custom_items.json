@@ -8,5 +8,54 @@
     "image_base64": "https://hatil-image.s3.ap-southeast-1.amazonaws.com/Nop_Image/HATIL%20Bed%20Epiphany-115.jpg",
     "tags": [],
     "is_custom": true
+  },
+  {
+    "id": "12dcff57-49c4-4018-ab07-a26107b5373d",
+    "name": "Ikea bed",
+    "description": "bed",
+    "category": "furniture",
+    "shop_id": "my_collection",
+    "image_base64": "https://hatil-image.s3.ap-southeast-1.amazonaws.com/Nop_Image/_2LZ1433-SharpenAI-motion%20copy.webp",
+    "tags": [],
+    "is_custom": true
+  },
+  {
+    "id": "bb0ebedc-6c00-44cd-bd0b-af532200a54a",
+    "name": "RAK-Feeling Matt Finish Colored Sanitarywares | Africa",
+    "description": "Make a statement in your bathrooms with matt finished coloured toilets paired with colored toilet seats, washbasins and shower trays that come in trendy colors of black, cappuccino, grey, greige and white.",
+    "category": "surfaces",
+    "shop_id": "my_collection",
+    "image_base64": "https://d3hdqda5v86kzc.cloudfront.net/media/filer_public/8f/90/8f90ed43-4cc7-4d7a-bbbe-a8dac39e3158/bannerbig_3.jpg",
+    "tags": [
+      "external",
+      "rakceramics.com"
+    ],
+    "is_custom": true
+  },
+  {
+    "id": "3d11806e-f5b4-4f74-b533-cfb985608060",
+    "name": "Hollinaze Dresser and Mirror",
+    "description": "Grace your restful retreat with an added dose of refinement. The Hollinaze dresser with mirror showcases a stunning rich brown wood tone, with sleek drawer pulls for an added layer of luxury. A rounded top and mirror frame soften the silhouette, elevating the look. It&rsquo;s curated, contemporary and utterly chic.",
+    "category": "decor",
+    "shop_id": "my_collection",
+    "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B386-31-36-ANGLE-SW-P1-KO",
+    "tags": [
+      "external",
+      "ashleyfurniture.com"
+    ],
+    "is_custom": true
+  },
+  {
+    "id": "a60b4270-71ab-48fd-83d2-3faac38b4b36",
+    "name": "RAK-Feeling Matt Finish Colored Sanitarywares | North America",
+    "description": "Make a statement in your bathrooms with matt finished coloured toilets paired with colored toilet seats, washbasins and shower trays that come in trendy colors of black, cappuccino, grey, greige and white.",
+    "category": "surfaces",
+    "shop_id": "my_collection",
+    "image_base64": "https://d3hdqda5v86kzc.cloudfront.net/media/filer_public/8f/90/8f90ed43-4cc7-4d7a-bbbe-a8dac39e3158/bannerbig_3.jpg",
+    "tags": [
+      "external",
+      "rakceramics.com"
+    ],
+    "is_custom": true
   }
 ]

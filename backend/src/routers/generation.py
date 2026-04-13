@@ -12,34 +12,53 @@ from src.models.generation import (
 from src.models.room import RoomResult
 from src.storage.json_store import JsonProjectStore
 from src.storage.catalog_store import CatalogStore
+from src.storage.vendor_index_store import VendorIndexStore
 from src.agents.orchestrator import DesignOrchestrator
-from src.dependencies import get_store, get_orchestrator, get_catalog_store
+from src.dependencies import (
+    get_store,
+    get_orchestrator,
+    get_catalog_store,
+    get_vendor_index_store,
+)
 
 router = APIRouter(tags=["generation"])
 
 
-def _get_catalog_descriptions(room, catalog: CatalogStore) -> list[str] | None:
-    """Look up catalog item descriptions for a room's selected items."""
+def _resolve_selected_items(
+    room, catalog: CatalogStore, vendors: VendorIndexStore
+) -> list:
+    """Resolve `selected_catalog_items` against both the curated catalog and the vendor index."""
     if not room.selected_catalog_items:
-        return None
-    items = catalog.get_items_by_ids(room.selected_catalog_items)
+        return []
+    items = list(catalog.get_items_by_ids(room.selected_catalog_items))
+    found_ids = {i.id for i in items}
+    missing = [i for i in room.selected_catalog_items if i not in found_ids]
+    if missing:
+        items.extend(vendors.get_items_by_ids(missing))
+    return items
+
+
+def _get_catalog_descriptions(
+    room, catalog: CatalogStore, vendors: VendorIndexStore
+) -> list[str] | None:
+    items = _resolve_selected_items(room, catalog, vendors)
     if not items:
         return None
     return [f"{item.name}: {item.description}" for item in items]
 
 
-def _get_reference_images(room, catalog: CatalogStore) -> list[str] | None:
-    """Collect reference images from a room's selected catalog items and floorplans."""
+def _get_reference_images(
+    room, catalog: CatalogStore, vendors: VendorIndexStore
+) -> list[str] | None:
     images = []
-    
+
     # 1. Provide the structural blueprint image first if it exists
     if getattr(room, 'blueprint_image', None):
         images.append(room.blueprint_image)
-        
-    if room.selected_catalog_items:
-        items = catalog.get_items_by_ids(room.selected_catalog_items)
-        images.extend([item.image_base64 for item in items if item.image_base64])
-        
+
+    items = _resolve_selected_items(room, catalog, vendors)
+    images.extend([item.image_base64 for item in items if item.image_base64])
+
     return images if images else None
 
 
@@ -50,6 +69,7 @@ async def generate_rooms(
     store: JsonProjectStore = Depends(get_store),
     orchestrator: DesignOrchestrator = Depends(get_orchestrator),
     catalog: CatalogStore = Depends(get_catalog_store),
+    vendors: VendorIndexStore = Depends(get_vendor_index_store),
 ):
     project = store.load(project_id)
     if not project:
@@ -68,8 +88,8 @@ async def generate_rooms(
 
     # Run batch generation (with catalog items + reference images)
     async def gen_with_catalog(room):
-        cat_descs = _get_catalog_descriptions(room, catalog)
-        ref_imgs = _get_reference_images(room, catalog) or []
+        cat_descs = _get_catalog_descriptions(room, catalog, vendors)
+        ref_imgs = _get_reference_images(room, catalog, vendors) or []
         all_ref_imgs = ref_imgs + req.reference_images
         return await orchestrator.generate_room(
             room, project.design_context,
@@ -134,6 +154,7 @@ async def generate_single_room(
     store: JsonProjectStore = Depends(get_store),
     orchestrator: DesignOrchestrator = Depends(get_orchestrator),
     catalog: CatalogStore = Depends(get_catalog_store),
+    vendors: VendorIndexStore = Depends(get_vendor_index_store),
 ):
     project = store.load(project_id)
     if not project:
@@ -144,8 +165,8 @@ async def generate_single_room(
         raise HTTPException(status_code=404, detail="Room not found")
 
     try:
-        cat_descs = _get_catalog_descriptions(room, catalog)
-        ref_imgs = _get_reference_images(room, catalog) or []
+        cat_descs = _get_catalog_descriptions(room, catalog, vendors)
+        ref_imgs = _get_reference_images(room, catalog, vendors) or []
         all_ref_imgs = ref_imgs + req.reference_images
         result = await orchestrator.generate_room(
             room, project.design_context,
@@ -176,6 +197,7 @@ async def modify_room(
     store: JsonProjectStore = Depends(get_store),
     orchestrator: DesignOrchestrator = Depends(get_orchestrator),
     catalog: CatalogStore = Depends(get_catalog_store),
+    vendors: VendorIndexStore = Depends(get_vendor_index_store),
 ):
     project = store.load(project_id)
     if not project:
@@ -193,7 +215,7 @@ async def modify_room(
         )
 
     try:
-        ref_imgs = _get_reference_images(room, catalog) or []
+        ref_imgs = _get_reference_images(room, catalog, vendors) or []
         all_ref_imgs = ref_imgs + req.reference_images
         result = await orchestrator.modify_room(
             room=room,

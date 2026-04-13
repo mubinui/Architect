@@ -1,0 +1,2609 @@
+{
+  "domain": "ashleyfurniture.com",
+  "name": "Ashley Furniture",
+  "logo_emoji": "🛏️",
+  "indexed_at": "2026-04-12T17:32:50.682557+00:00",
+  "error": null,
+  "items": [
+    {
+      "id": "ashleyfurniture.com_7e638d55276ca146",
+      "name": "Serta Motion Essent California King Split Adjustable Base",
+      "description": "Ashley Furniture · Serta Motion Essent California King Split Adjustable Base",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/82951950A-SW-KO",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_1ad4829c0e8593e2",
+      "name": "B386B1",
+      "description": "Ashley Furniture · B386B1",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B386-31-36-ANGLE-SW-P1-KO",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_72b23ff9fb755749",
+      "name": "B392B1",
+      "description": "Ashley Furniture · B392B1",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B392-31-36-4X3-CROP",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_0f2cda8012b73cd5",
+      "name": "B414B1",
+      "description": "Ashley Furniture · B414B1",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B414-21-26",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_74f6db4a82858336",
+      "name": "B414B2",
+      "description": "Ashley Furniture · B414B2",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B414-53-52-86",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_b5ec65c082d8a7fe",
+      "name": "B414B3",
+      "description": "Ashley Furniture · B414B3",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B414-87-84-86",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_16d16e6b10b10651",
+      "name": "B425B1",
+      "description": "Ashley Furniture · B425B1",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B425-31-36",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_62e4ce192cf0d118",
+      "name": "B425B2",
+      "description": "Ashley Furniture · B425B2",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B425-58-56-97",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_aa8a96f533330e7e",
+      "name": "B425B4",
+      "description": "Ashley Furniture · B425B4",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B425-58-56-97",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_3f2cbaa8e227d711",
+      "name": "B425B5",
+      "description": "Ashley Furniture · B425B5",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B425-58-56-97",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_08481a1351e4fa20",
+      "name": "B427B1",
+      "description": "Ashley Furniture · B427B1",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B427-31-36",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_5fe84181b3235ec2",
+      "name": "B427B2",
+      "description": "Ashley Furniture · B427B2",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B427-53-83",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_68f581dbfb3f678d",
+      "name": "B427B4",
+      "description": "Ashley Furniture · B427B4",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B427-87-83",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_2f0122ea3a00968a",
+      "name": "B427B6",
+      "description": "Ashley Furniture · B427B6",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B427-82-97",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_e38861289ba3e5da",
+      "name": "B427B8",
+      "description": "Ashley Furniture · B427B8",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B427-82-97",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_103b999c57d30144",
+      "name": "B427B9",
+      "description": "Ashley Furniture · B427B9",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B427-82-97",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_134a322071e2490c",
+      "name": "B430B1",
+      "description": "Ashley Furniture · B430B1",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B430-31-36-4X3-CROP",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_5631094ddf38e633",
+      "name": "B430B2",
+      "description": "Ashley Furniture · B430B2",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B430-82-97-4X3-CROP",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_2dd1a83208eb1ab1",
+      "name": "B430B4",
+      "description": "Ashley Furniture · B430B4",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B430-82-97-4X3-CROP",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_5e81a067c65af414",
+      "name": "B430B5",
+      "description": "Ashley Furniture · B430B5",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B430-82-97-4X3-CROP",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_60f5c904fa7aeff8",
+      "name": "B433B1",
+      "description": "Ashley Furniture · B433B1",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B433-31-36",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_fdcd92dba2cf1377",
+      "name": "B433B2",
+      "description": "Ashley Furniture · B433B2",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B433-82-97",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_2dcc116f2947431c",
+      "name": "B433B6",
+      "description": "Ashley Furniture · B433B6",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B433-82-97",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_3a68d7dea3a5434d",
+      "name": "B433B7",
+      "description": "Ashley Furniture · B433B7",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B433-82-97",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_954b60b69507afe5",
+      "name": "B441B1",
+      "description": "Ashley Furniture · B441B1",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B441-31-36-4X3-CROP",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_c8fca17d1e2a0f28",
+      "name": "B441B2",
+      "description": "Ashley Furniture · B441B2",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B441-53-83-4X3-CROP",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_263a98bc8322debe",
+      "name": "B441B4",
+      "description": "Ashley Furniture · B441B4",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B441-87-83-4X3-CROP",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_84805046df9a8f25",
+      "name": "B441B6",
+      "description": "Ashley Furniture · B441B6",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B441-81-97-4X3-CROP",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_a1269a959eb87f92",
+      "name": "B441B8",
+      "description": "Ashley Furniture · B441B8",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B441-82-97-4X3-CROP",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_e2fb5261da6e0288",
+      "name": "B441B9",
+      "description": "Ashley Furniture · B441B9",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B441-82-97-4X3-CROP",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_f46737c018c18cc1",
+      "name": "B480B1",
+      "description": "Ashley Furniture · B480B1",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B480-31-36",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_68dbd2603480fce1",
+      "name": "B480B2",
+      "description": "Ashley Furniture · B480B2",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B480-57-54-197-ANGLE-SW-P1-KO",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_98ddcc145a2bb0f6",
+      "name": "B480B4",
+      "description": "Ashley Furniture · B480B4",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B480-77-174S-197",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_38921803658f9b06",
+      "name": "B480B6",
+      "description": "Ashley Furniture · B480B6",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B480-58-56-197",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_4d085bd58c0ff1e0",
+      "name": "B480B7",
+      "description": "Ashley Furniture · B480B7",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B480-58-56-197",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_1836642e3a10842e",
+      "name": "B480B8",
+      "description": "Ashley Furniture · B480B8",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B480-78-176S-197",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_362878223174d176",
+      "name": "B480B9",
+      "description": "Ashley Furniture · B480B9",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B480-78-176S-197",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_6215056d55174b96",
+      "name": "B481B1",
+      "description": "Ashley Furniture · B481B1",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B481-31-36",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_88662b69b0ac4adb",
+      "name": "B481B2",
+      "description": "Ashley Furniture · B481B2",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B481-57-54-197",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_9226ced63656ae6a",
+      "name": "B481B4",
+      "description": "Ashley Furniture · B481B4",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B481-77-174S-197-ANGLE-SW-P1-KO",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_bc40d6b5032c48cb",
+      "name": "B481B6",
+      "description": "Ashley Furniture · B481B6",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B481-58-56-197",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_b8ce9ee90ef4648f",
+      "name": "B481B7",
+      "description": "Ashley Furniture · B481B7",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B481-58-56-197",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_056fdb7f48b8bbb9",
+      "name": "B481B8",
+      "description": "Ashley Furniture · B481B8",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B481-78-176S-197",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_66f34c9a7f7dbdd0",
+      "name": "B481B9",
+      "description": "Ashley Furniture · B481B9",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B481-78-176S-197",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_a910ee7ab4a43f50",
+      "name": "B486B1",
+      "description": "Ashley Furniture · B486B1",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B486-31-36",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_7250e10b1a96d227",
+      "name": "B584B1",
+      "description": "Ashley Furniture · B584B1",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B584-81-96",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_f428c052bfcdd1e7",
+      "name": "B584B2",
+      "description": "Ashley Furniture · B584B2",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B584-82-96",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_67c0f9b0ecbdaad8",
+      "name": "B584B3",
+      "description": "Ashley Furniture · B584B3",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B584-82-96",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_5053c8cbdcf1315d",
+      "name": "B602B1",
+      "description": "Ashley Furniture · B602B1",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B602-31-36-4X3-CROP",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_9e597f964fa42ecc",
+      "name": "B602B4",
+      "description": "Ashley Furniture · B602B4",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B602-158-56S-97S-4X3-CROP",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_d547a696d9266968",
+      "name": "B602B8",
+      "description": "Ashley Furniture · B602B8",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B602-158-56S-97S-4X3-CROP",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_a160a41e3e10e93b",
+      "name": "B602B9",
+      "description": "Ashley Furniture · B602B9",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B602-158-56S-97S-4X3-CROP",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_a0e191487bd689d3",
+      "name": "B606B1",
+      "description": "Ashley Furniture · B606B1",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B606-31-36",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_c7de309328585500",
+      "name": "B606B2",
+      "description": "Ashley Furniture · B606B2",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B606-58-56-97",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_04e4a5be7e3241af",
+      "name": "B606B6",
+      "description": "Ashley Furniture · B606B6",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B606-58-56-97",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_f970fc975c13203f",
+      "name": "B606B7",
+      "description": "Ashley Furniture · B606B7",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B606-58-56-97",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_da922855d037da42",
+      "name": "B612B1",
+      "description": "Ashley Furniture · B612B1",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B612-31-36-4X3-CROP",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_e8e358efef4a99cc",
+      "name": "B612B2",
+      "description": "Ashley Furniture · B612B2",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B612-58-56-97",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_76e52049ecdf5a27",
+      "name": "B612B4",
+      "description": "Ashley Furniture · B612B4",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B612-58-56-97-4X3-CROP",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_1e87de60d743a21c",
+      "name": "B612B5",
+      "description": "Ashley Furniture · B612B5",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B612-58-56-97-4X3-CROP",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_24e82fbbf036027e",
+      "name": "B615B1",
+      "description": "Ashley Furniture · B615B1",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B615-31-36",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_c8c0850cb701eb16",
+      "name": "B615B2",
+      "description": "Ashley Furniture · B615B2",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B615-81-97-SW-P1-KO",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_76b28784dde5fd56",
+      "name": "B615B6",
+      "description": "Ashley Furniture · B615B6",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B615-82",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_4bdca314ab40eec0",
+      "name": "B615B7",
+      "description": "Ashley Furniture · B615B7",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B615-82",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_5e9e66d55f882fcd",
+      "name": "B651B1",
+      "description": "Ashley Furniture · B651B1",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B651-31-36",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_747f50679f65d06c",
+      "name": "B680B1",
+      "description": "Ashley Furniture · B680B1",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B680-31-36",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_8b397ae54ed7e253",
+      "name": "B680B2",
+      "description": "Ashley Furniture · B680B2",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B680-57-54-97-ANGLE-SW-P1-KO",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_358e1eb5b63ad911",
+      "name": "B680B4",
+      "description": "Ashley Furniture · B680B4",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B680-58-56-97",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_2af9f563e783f561",
+      "name": "B680B5",
+      "description": "Ashley Furniture · B680B5",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B680-58-56-94-ANGLE-SW-P1-KO",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_d933d20787d4dfa6",
+      "name": "B680B6",
+      "description": "Ashley Furniture · B680B6",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B680-53-52-86",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_4ae5de67bc22fcb2",
+      "name": "B680B8",
+      "description": "Ashley Furniture · B680B8",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B680-87-84-86-AGR",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_fbaf3be8438deefc",
+      "name": "B685B1",
+      "description": "Ashley Furniture · B685B1",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B685-31-36",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_a1ea42c4cf35ec50",
+      "name": "B685B2",
+      "description": "Ashley Furniture · B685B2",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B685-57-54-97",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_4920aa25258c5bc7",
+      "name": "B685B4",
+      "description": "Ashley Furniture · B685B4",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B685-58-56-97",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_680a83e311d7d309",
+      "name": "B685B5",
+      "description": "Ashley Furniture · B685B5",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B685-58-56-94-ANGLE-SW-P1-KO",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_6a9724f0890ff90b",
+      "name": "B685B6",
+      "description": "Ashley Furniture · B685B6",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B685-53-52-86",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_98b563f9ac883f5a",
+      "name": "B685B8",
+      "description": "Ashley Furniture · B685B8",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B685-87-84-86",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_8deb71dcdf210576",
+      "name": "B687B1",
+      "description": "Ashley Furniture · B687B1",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B687-31-36",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_c68debc800f152d2",
+      "name": "B687B2",
+      "description": "Ashley Furniture · B687B2",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B687-53-52-86",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_5be246a441a0c4af",
+      "name": "B687B4",
+      "description": "Ashley Furniture · B687B4",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B687-87-84-86",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_55c61aef03a72884",
+      "name": "B687B6",
+      "description": "Ashley Furniture · B687B6",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B687-57-54-97-ANGLE-SW-P1-KO",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_6a8e5e82842c4100",
+      "name": "B687B8",
+      "description": "Ashley Furniture · B687B8",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B687-58-56-97",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_5d33d96cc7c1a086",
+      "name": "B687B9",
+      "description": "Ashley Furniture · B687B9",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B687-58-56-94-ANGLE-SW-P1-KO",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_4adee6f961a3c147",
+      "name": "B689B1",
+      "description": "Ashley Furniture · B689B1",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B689-31-36",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_fa20906d924d47fb",
+      "name": "B689B2",
+      "description": "Ashley Furniture · B689B2",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B689-57-54-4X3-CROP",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_32b1a16672e16ecf",
+      "name": "B689B4",
+      "description": "Ashley Furniture · B689B4",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B689-58-56",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_2dfc10f07e5ae07a",
+      "name": "B689B5",
+      "description": "Ashley Furniture · B689B5",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B689-58-56",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_5c9ccdcb916fee82",
+      "name": "B694B1",
+      "description": "Ashley Furniture · B694B1",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B694-31-36",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_414dc09417c58926",
+      "name": "B694B2",
+      "description": "Ashley Furniture · B694B2",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B694-82-97",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_6175ec159fad620b",
+      "name": "B694B4",
+      "description": "Ashley Furniture · B694B4",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B694-82-97",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_75793975ea1a56d8",
+      "name": "B694B5",
+      "description": "Ashley Furniture · B694B5",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B694-82-97",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_53910bc66daf2e56",
+      "name": "B735B1",
+      "description": "Ashley Furniture · B735B1",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B735-31-36",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_fe8574b21705f445",
+      "name": "B735B4",
+      "description": "Ashley Furniture · B735B4",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B735-77-74",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_3acedd945dd1699d",
+      "name": "B735B8",
+      "description": "Ashley Furniture · B735B8",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B735-78-76",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_3bbaaca99b7b79f7",
+      "name": "B735B9",
+      "description": "Ashley Furniture · B735B9",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B735-78-76",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_792d4f1e009988ca",
+      "name": "B747B2",
+      "description": "Ashley Furniture · B747B2",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B747-57-54",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_ca2e5c706e04aa05",
+      "name": "B747B3",
+      "description": "Ashley Furniture · B747B3",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B747-58-56",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_f6452c1716a872c7",
+      "name": "B764B1",
+      "description": "Ashley Furniture · B764B1",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B764-31-36",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_4f3b9a57dd5fbaf5",
+      "name": "B764B5",
+      "description": "Ashley Furniture · B764B5",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B764-50-72-97",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_7bc8fca5b241497a",
+      "name": "B764B9",
+      "description": "Ashley Furniture · B764B9",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B764-50-72-97",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_e8d94ec1523721ee",
+      "name": "B768B1",
+      "description": "Ashley Furniture · B768B1",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B768-31-36",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_aefbc2d9a89433d8",
+      "name": "B768B2",
+      "description": "Ashley Furniture · B768B2",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B768-57-54",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_9d633b82fab62b30",
+      "name": "B768B4",
+      "description": "Ashley Furniture · B768B4",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B768-58-56",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_91d7789e323e64a6",
+      "name": "B768B5",
+      "description": "Ashley Furniture · B768B5",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B768-58-56",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_ccbd7a834ba09a41",
+      "name": "B769B1",
+      "description": "Ashley Furniture · B769B1",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B769-31-36",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_ad3eeec7c99f3c98",
+      "name": "B769B2",
+      "description": "Ashley Furniture · B769B2",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B769-82-97",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_1dccb26fa56f70a5",
+      "name": "B769B4",
+      "description": "Ashley Furniture · B769B4",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B769-82-97",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_fabe71b613054163",
+      "name": "B769B5",
+      "description": "Ashley Furniture · B769B5",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B769-82-97",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_62f382fbb1f21b80",
+      "name": "B771B1",
+      "description": "Ashley Furniture · B771B1",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B771-31-36",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_3a446ee9730664a2",
+      "name": "B771B2",
+      "description": "Ashley Furniture · B771B2",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B771-57-54S-197",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_72ac3d9b2926a637",
+      "name": "B771B4",
+      "description": "Ashley Furniture · B771B4",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B771-81-97",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_18a53e8cb6096374",
+      "name": "B771B6",
+      "description": "Ashley Furniture · B771B6",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B771-58-56S-197",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_6b5ade5ccd51bc63",
+      "name": "B771B7",
+      "description": "Ashley Furniture · B771B7",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B771-58-56S-194",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_a114aeb35a0a077b",
+      "name": "B771B8",
+      "description": "Ashley Furniture · B771B8",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B771-82-97",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_b1fa2bc366c5b423",
+      "name": "B771B9",
+      "description": "Ashley Furniture · B771B9",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B771-82-94",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_ca21d1d4850741a8",
+      "name": "B779B1",
+      "description": "Ashley Furniture · B779B1",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B779-31-36-ANGLE-CLSD-SW-P1-KO",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_d7fd06304d1d6a70",
+      "name": "B779B2",
+      "description": "Ashley Furniture · B779B2",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B779-57-54-96-ANGLE-SW-P1-KO",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_667f925709fb5ffb",
+      "name": "B779B4",
+      "description": "Ashley Furniture · B779B4",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B779-77-74-98-ANGLE-SW-P1-KO",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_7857ff8f2d844ee4",
+      "name": "B779B6",
+      "description": "Ashley Furniture · B779B6",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B779-58-56-97-ANGLE-SW-P1-KO",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_28fa62b5086066aa",
+      "name": "B779B7",
+      "description": "Ashley Furniture · B779B7",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B779-58-56-94-ANGLE-SW-P1-KO",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_a1908e45c4e6be45",
+      "name": "B779B8",
+      "description": "Ashley Furniture · B779B8",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B779-78-76-99-ANGLE-SW-P1-KO",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_9049fc2f01c6f512",
+      "name": "B779B9",
+      "description": "Ashley Furniture · B779B9",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B779-78-76-95-ANGLE-SW-P1-KO",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_8e5879906589cf40",
+      "name": "B785B1",
+      "description": "Ashley Furniture · B785B1",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B785-31-36",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_67d6fb5935900c39",
+      "name": "B785B2",
+      "description": "Ashley Furniture · B785B2",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B785-82-97",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_349be76fc7fd8e04",
+      "name": "B785B4",
+      "description": "Ashley Furniture · B785B4",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B785-82-97",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_e0eb2121b3710742",
+      "name": "B785B5",
+      "description": "Ashley Furniture · B785B5",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B785-82-97",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_bdd96db640c0c1e7",
+      "name": "B790B1",
+      "description": "Ashley Furniture · B790B1",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B790-31-36",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_f60745f676adceec",
+      "name": "B790B2",
+      "description": "Ashley Furniture · B790B2",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B790-82-97",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_bfa3d99dee2f798f",
+      "name": "B790B4",
+      "description": "Ashley Furniture · B790B4",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B790-82-97",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_d644bc17643b9d8c",
+      "name": "B790B5",
+      "description": "Ashley Furniture · B790B5",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B790-82-97",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_432861c6cd38f6df",
+      "name": "B794B1",
+      "description": "Ashley Furniture · B794B1",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B794-31-36",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_b287dac7c6f33c68",
+      "name": "B794B3",
+      "description": "Ashley Furniture · B794B3",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B794-182-197-CLSD",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_ce7c657a1a243390",
+      "name": "B794B5",
+      "description": "Ashley Furniture · B794B5",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B794-58-56-97",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_a9a0c1fefaf7f050",
+      "name": "B794B7",
+      "description": "Ashley Furniture · B794B7",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B794-58-56-97",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_dede731c4c37c38c",
+      "name": "B794B8",
+      "description": "Ashley Furniture · B794B8",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B794-58-56-97",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_cb4e3e3d69b75a04",
+      "name": "B794B9",
+      "description": "Ashley Furniture · B794B9",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B794-182-197-CLSD",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_7c9cf9e62c664802",
+      "name": "B821B1",
+      "description": "Ashley Furniture · B821B1",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B821-31-36",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_974db229f8708761",
+      "name": "B821B2",
+      "description": "Ashley Furniture · B821B2",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B821-57-54",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_2c4b01d263687933",
+      "name": "B821B4",
+      "description": "Ashley Furniture · B821B4",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B821-58-56",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_e81ed51192947d55",
+      "name": "B821B5",
+      "description": "Ashley Furniture · B821B5",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B821-58-56",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_b7e0f00876094c9a",
+      "name": "B822B1",
+      "description": "Ashley Furniture · B822B1",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B822-31-36-LED-ON",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_2a5867cf23998711",
+      "name": "B822B2",
+      "description": "Ashley Furniture · B822B2",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B822-58-56S-97-LED-ON",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_26e0be7d235dae12",
+      "name": "B822B4",
+      "description": "Ashley Furniture · B822B4",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B822-58-56S-97-LED-ON",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_33119e8bcc56f386",
+      "name": "B822B5",
+      "description": "Ashley Furniture · B822B5",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B822-58-56S-97-LED-ON",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_e616aed680bc7e06",
+      "name": "B822B7",
+      "description": "Ashley Furniture · B822B7",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B822-22-25-ANGLE-CLSD-OFF-SW-P1-KO",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_2dbe1f567857bbbe",
+      "name": "B823B1",
+      "description": "Ashley Furniture · B823B1",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B823-31-36-ANGLE-CLSD-SW-P1-KO",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_68a244dac367fc6f",
+      "name": "B824B1",
+      "description": "Ashley Furniture · B824B1",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B824-31-36-ANGLE-CLSD-SW-P1-KO",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_0a290c792219b2bf",
+      "name": "B856B1",
+      "description": "Ashley Furniture · B856B1",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B856-31-36",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_f5486e576babb772",
+      "name": "B856B4",
+      "description": "Ashley Furniture · B856B4",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B856-82-50-97",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_e129867f88bf8f43",
+      "name": "B856B8",
+      "description": "Ashley Furniture · B856B8",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B856-82-50-97",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_ab9424df1de54442",
+      "name": "B856B9",
+      "description": "Ashley Furniture · B856B9",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B856-82-50-97",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_5fda87cea1bc7dd4",
+      "name": "B857B1",
+      "description": "Ashley Furniture · B857B1",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B857-31-36-SET",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_fff7e4a6caee0aed",
+      "name": "B857B2",
+      "description": "Ashley Furniture · B857B2",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B857-71-51-61-SET",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_31ab08adaed9907b",
+      "name": "B857B4",
+      "description": "Ashley Furniture · B857B4",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B857-57-54-97-SET",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_cd3978141b001cac",
+      "name": "B857B6",
+      "description": "Ashley Furniture · B857B6",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B857-72-51-62-SET",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_6f3693eab604813e",
+      "name": "B857B7",
+      "description": "Ashley Furniture · B857B7",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B857-72-95-63-SET",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_07eb5d558da8de43",
+      "name": "B857B8",
+      "description": "Ashley Furniture · B857B8",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B857-58-56-97-SET",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_ce1fb24bbf3c3b9c",
+      "name": "B857B9",
+      "description": "Ashley Furniture · B857B9",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B857-58-56-94-SET",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_24e6dfb8b000ac2e",
+      "name": "B916B1",
+      "description": "Ashley Furniture · B916B1",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B916-31-36-LED-ON",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_05e292d73baf905e",
+      "name": "B916B2",
+      "description": "Ashley Furniture · B916B2",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B916-58-56-97-4X3-CROP",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_1973fee569476ccf",
+      "name": "B916B4",
+      "description": "Ashley Furniture · B916B4",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B916-58-56-97",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_7ad691cee8777fd6",
+      "name": "B916B5",
+      "description": "Ashley Furniture · B916B5",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B916-58-56-97",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_07f5629364c2862a",
+      "name": "B922B1",
+      "description": "Ashley Furniture · B922B1",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B922-31-36",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_dcdc982ebd17162b",
+      "name": "B922B3",
+      "description": "Ashley Furniture · B922B3",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B922-58-56-4X3-CROP",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_cc1f2d42e4599436",
+      "name": "B922B5",
+      "description": "Ashley Furniture · B922B5",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B922-58-56",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_63ff02efe34bb630",
+      "name": "B922B6",
+      "description": "Ashley Furniture · B922B6",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B922-58-56",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_c2ef87890b338def",
+      "name": "B924B1",
+      "description": "Ashley Furniture · B924B1",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B924-31-36",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_1c4027e356bf2d66",
+      "name": "B924B2",
+      "description": "Ashley Furniture · B924B2",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B924-57-54-ANGLE-SW-P1-KO",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_c4d1816a941aa2a3",
+      "name": "B924B4",
+      "description": "Ashley Furniture · B924B4",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B924-58-56",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_c658053391629436",
+      "name": "B924B5",
+      "description": "Ashley Furniture · B924B5",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B924-58-95-ANGLE-SW-P1-KO",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_4116d5825702e16a",
+      "name": "B944B1",
+      "description": "Ashley Furniture · B944B1",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B944-31-36",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_09a9525f4d18e8f4",
+      "name": "B944B2",
+      "description": "Ashley Furniture · B944B2",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B944-57-54-97",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_a65a8921bd1d0db9",
+      "name": "B944B4",
+      "description": "Ashley Furniture · B944B4",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B944-58-56-97",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_4fc1ea5c87837933",
+      "name": "B944B5",
+      "description": "Ashley Furniture · B944B5",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B944-58-56-97",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_b9bb15e792fe3a77",
+      "name": "B947B1",
+      "description": "Ashley Furniture · B947B1",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B947-31-36",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_2fa6f072f4f62a85",
+      "name": "B947B2",
+      "description": "Ashley Furniture · B947B2",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B947-58-56-97-4X3-CROP",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_34d504be1bd9d741",
+      "name": "B947B4",
+      "description": "Ashley Furniture · B947B4",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B947-58-56-97",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_286924c7278bf5a2",
+      "name": "B947B5",
+      "description": "Ashley Furniture · B947B5",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B947-58-56-97",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_89f434098d812e24",
+      "name": "B948B1",
+      "description": "Ashley Furniture · B948B1",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B948-31-36-4X3-CROP",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_fcf00e36868c9745",
+      "name": "B954B1",
+      "description": "Ashley Furniture · B954B1",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B954-31-36-HEAD-ON",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_a37bc681ab9b8b9c",
+      "name": "B954B2",
+      "description": "Ashley Furniture · B954B2",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B954-57-54-97-ANGLE-SW-P1-KO",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_991bc9488eb96e1a",
+      "name": "B954B7",
+      "description": "Ashley Furniture · B954B7",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B954-58-56-97-ANGLE-SW-P1-KO",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_4868c92562fceee2",
+      "name": "B954B8",
+      "description": "Ashley Furniture · B954B8",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B954-58-56-94-ANGLE-SW-P1-KO",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_382938524e7d315c",
+      "name": "B954B9",
+      "description": "Ashley Furniture · B954B9",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B954-77-74-99-ANGLE-SW-P1-KO",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_72ded45b66b43fba",
+      "name": "B971B1",
+      "description": "Ashley Furniture · B971B1",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B971-31-36",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_a78b722109c56cd8",
+      "name": "B974B1",
+      "description": "Ashley Furniture · B974B1",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B974-31-36",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_22313a54a5c2d18b",
+      "name": "B974B2",
+      "description": "Ashley Furniture · B974B2",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B974-78-76",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_f36b81ff9aafd52a",
+      "name": "B974B4",
+      "description": "Ashley Furniture · B974B4",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B974-58-56-50-97S-CLSD",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_6c4e752a5ed6e625",
+      "name": "B974B6",
+      "description": "Ashley Furniture · B974B6",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B974-78-76",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_223ae8ce685d308b",
+      "name": "B974B7",
+      "description": "Ashley Furniture · B974B7",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B974-78-76",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_c160340b57d7c42b",
+      "name": "B974B8",
+      "description": "Ashley Furniture · B974B8",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B974-58-56-50-97S-CLSD",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_b4c693175df3c5f6",
+      "name": "B974B9",
+      "description": "Ashley Furniture · B974B9",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B974-58-56-50-97S-CLSD",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_a8c3bfd5b568951d",
+      "name": "B980B1",
+      "description": "Ashley Furniture · B980B1",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B980-31-36",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_d92ecc7332e37969",
+      "name": "B985B1",
+      "description": "Ashley Furniture · B985B1",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B985-31-36-HEAD-ON-SW-P1-KO",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_1d2644b1a139f151",
+      "name": "B985B2",
+      "description": "Ashley Furniture · B985B2",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B985-57-54-97-ANGLE-SW-P1-KO",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_faa020ddbe9de14c",
+      "name": "B985B4",
+      "description": "Ashley Furniture · B985B4",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B985-81-99-50-ANGLE-SW-P1-KO",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_026f748ebd3d0ff4",
+      "name": "B985B7",
+      "description": "Ashley Furniture · B985B7",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B985-58-56-97-ANGLE-SW-P1-KO",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_90bc9f1a80547968",
+      "name": "B985B8",
+      "description": "Ashley Furniture · B985B8",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B985-82-99-50-ANGLE-SW-P1-KO",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_75019557241348f3",
+      "name": "B985B9",
+      "description": "Ashley Furniture · B985B9",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B985-58-56-94-ANGLE-SW-P1-KO",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    },
+    {
+      "id": "ashleyfurniture.com_65cbadd1d0d59bf4",
+      "name": "D522D3",
+      "description": "Ashley Furniture · D522D3",
+      "category": "furniture",
+      "shop_id": "ashleyfurniture.com",
+      "image_base64": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/D522-25T-25B",
+      "tags": [
+        "ashleyfurniture.com",
+        "indexed"
+      ],
+      "is_custom": false
+    }
+  ]
+}

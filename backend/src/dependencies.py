@@ -3,6 +3,7 @@ from functools import lru_cache
 from src.config import get_settings
 from src.storage.json_store import JsonProjectStore
 from src.storage.catalog_store import CatalogStore
+from src.storage.vendor_index_store import VendorIndexStore
 from src.services.openrouter import OpenRouterClient
 from src.agents.orchestrator import DesignOrchestrator
 
@@ -32,3 +33,8 @@ def get_orchestrator() -> DesignOrchestrator:
 @lru_cache
 def get_catalog_store() -> CatalogStore:
     return CatalogStore(get_settings().data_dir)
+
+
+@lru_cache
+def get_vendor_index_store() -> VendorIndexStore:
+    return VendorIndexStore(get_settings().data_dir)

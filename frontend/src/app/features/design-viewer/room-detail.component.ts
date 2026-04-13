@@ -5,18 +5,19 @@ import { ProjectStore } from '../../core/store/project.store';
 import { getFurnitureForRoom, FurnitureItem } from '../../core/data/furniture-presets';
 import { WebScannerComponent } from '../../shared/components/web-scanner.component';
 import { FloorplanEditorComponent } from './floorplan-editor.component';
+import { Room3dViewerComponent } from './room-3d-viewer.component';
 import { CatalogService } from '../../core/services/catalog.service';
 import { CatalogItem } from '../../core/models/catalog.model';
 import { BlueprintElement } from '../../core/models/room.model';
 import { firstValueFrom } from 'rxjs';
 
-type MainTab = 'blueprint' | 'design';
+type MainTab = 'blueprint' | 'design' | 'view3d';
 type SideSection = 'furniture' | 'references' | 'details';
 
 @Component({
   selector: 'app-room-detail',
   standalone: true,
-  imports: [RouterLink, FormsModule, WebScannerComponent, FloorplanEditorComponent],
+  imports: [RouterLink, FormsModule, WebScannerComponent, FloorplanEditorComponent, Room3dViewerComponent],
   template: `
     <div class="page">
       @if (!room()) {
@@ -43,6 +44,13 @@ type SideSection = 'furniture' | 'references' | 'details';
               (click)="activeTab.set('blueprint')">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="7" height="7" stroke="currentColor" stroke-width="1.5"/><rect x="14" y="3" width="7" height="7" stroke="currentColor" stroke-width="1.5"/><rect x="3" y="14" width="7" height="7" stroke="currentColor" stroke-width="1.5"/><rect x="14" y="14" width="7" height="7" stroke="currentColor" stroke-width="1.5"/></svg>
               Blueprint
+            </button>
+            <button
+              class="tab"
+              [class.tab--active]="activeTab() === 'view3d'"
+              (click)="activeTab.set('view3d')">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 3L21 8V16L12 21L3 16V8L12 3Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M3 8L12 13L21 8" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M12 13V21" stroke="currentColor" stroke-width="1.5"/></svg>
+              3D View
             </button>
             <button
               class="tab"
@@ -77,6 +85,16 @@ type SideSection = 'furniture' | 'references' | 'details';
           @if (activeTab() === 'blueprint') {
             <div class="content-fill">
               <app-floorplan-editor [spec]="room()!" (save)="onFloorplanSave($event)"></app-floorplan-editor>
+            </div>
+          }
+
+          <!-- ── 3D VIEW TAB ── -->
+          @if (activeTab() === 'view3d') {
+            <div class="content-fill">
+              <app-room-3d-viewer
+                [room]="room()!"
+                [catalogItems]="availableCatalogItems()">
+              </app-room-3d-viewer>
             </div>
           }
 
@@ -421,6 +439,9 @@ type SideSection = 'furniture' | 'references' | 'details';
           border: none;
           border-radius: 0;
         }
+      }
+      app-room-3d-viewer {
+        flex: 1; display: block; min-height: 0;
       }
     }
 

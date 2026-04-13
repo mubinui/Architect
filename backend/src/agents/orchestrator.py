@@ -7,7 +7,7 @@ from src.models.design_context import DesignContext
 from src.agents.skills.spatial_reasoner import SpatialReasoner
 from src.agents.skills.color_harmonizer import ColorHarmonizer
 from src.agents.skills.style_coherence import StyleCoherence
-from src.agents.skills.prompt_composer import PromptComposer
+from src.agents.skills.prompt_composer import PromptComposer, build_spatial_directive
 from src.agents.skills.consistency_guard import ConsistencyGuard
 from src.agents.templates.base_room import (
     SYSTEM_PROMPT,
@@ -84,11 +84,28 @@ class DesignOrchestrator:
                 )
                 _, validated_prompt, _ = self.guard.validate(enriched_prompt, context)
 
-            # Stage 5: Image generation via Nano Banana 2
+            # Stage 4b: Append spatial directive AFTER Gemini enrichment so it
+            # cannot be paraphrased away. The image model sees the hard positions.
+            spatial_directive = build_spatial_directive(room)
+            if spatial_directive:
+                image_prompt = validated_prompt + "\n\n" + spatial_directive
+                logger.info("Spatial directive injected for room '%s'", room.name)
+            else:
+                image_prompt = validated_prompt
+
+            # Stage 5: Image generation — blueprint is passed separately as the
+            # spatial anchor; catalog/user images follow as style references.
+            blueprint_img = room.blueprint_image if room.blueprint_image else None
+            other_refs = [
+                img for img in (reference_images or [])
+                if img and img != blueprint_img
+            ] or None
+
             image_base64 = await self.client.generate_image(
                 model=self.settings.nano_banana_model,
-                prompt=validated_prompt,
-                reference_images=reference_images,
+                prompt=image_prompt,
+                reference_images=other_refs,
+                blueprint_image=blueprint_img,
             )
 
             return RoomResult(
@@ -135,11 +152,24 @@ class DesignOrchestrator:
             if warnings:
                 logger.warning("Modification consistency warnings: %s", "; ".join(warnings))
 
-            # Generate image
+            # Append spatial directive so modified images also follow the layout
+            spatial_directive = build_spatial_directive(room)
+            mod_image_prompt = (
+                validated_prompt + "\n\n" + spatial_directive
+                if spatial_directive else validated_prompt
+            )
+
+            blueprint_img = room.blueprint_image if room.blueprint_image else None
+            mod_other_refs = [
+                img for img in (reference_images or [])
+                if img and img != blueprint_img
+            ] or None
+
             image_base64 = await self.client.generate_image(
                 model=self.settings.nano_banana_model,
-                prompt=validated_prompt,
-                reference_images=reference_images,
+                prompt=mod_image_prompt,
+                reference_images=mod_other_refs,
+                blueprint_image=blueprint_img,
             )
 
             new_history = original_result.modification_history + [modification_prompt]

@@ -59,12 +59,11 @@ def _element_position(el: BlueprintElement, board_w: float, board_h: float) -> s
 
 
 def _build_spatial_layout(room: RoomSpec) -> str:
-    """Convert blueprint_elements to a precise spatial description."""
+    """Convert blueprint_elements to a precise spatial description (for Gemini enrichment prompt)."""
     elements = room.blueprint_elements
     if not elements:
         return ""
 
-    # Calculate board height from room ratio
     ratio = room.dimensions.width / room.dimensions.length
     board_h = _EDITOR_BOARD_W / ratio
 
@@ -77,6 +76,29 @@ def _build_spatial_layout(room: RoomSpec) -> str:
         "Camera angle: position viewer at a diagonal corner (3/4 perspective) "
         "that shows both the north/west walls to reveal the full spatial arrangement above."
     )
+    return "\n".join(lines)
+
+
+def build_spatial_directive(room: RoomSpec) -> str:
+    """
+    Build a terse, hard-constraint spatial directive appended directly to the
+    image-generation prompt AFTER Gemini enrichment — so the image model cannot
+    ignore or paraphrase the positions.
+    """
+    elements = room.blueprint_elements
+    if not elements:
+        return ""
+
+    ratio = room.dimensions.width / room.dimensions.length
+    board_h = _EDITOR_BOARD_W / ratio
+
+    lines = [
+        "MANDATORY FURNITURE POSITIONS — RENDER EXACTLY AS SPECIFIED (north=top wall, south=bottom wall, west=left wall, east=right wall):"
+    ]
+    for el in elements:
+        pos = _element_position(el, _EDITOR_BOARD_W, board_h)
+        lines.append(f"• {el.label} → {pos}")
+
     return "\n".join(lines)
 
 

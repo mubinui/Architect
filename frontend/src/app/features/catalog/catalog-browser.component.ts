@@ -1,11 +1,21 @@
 import { Component, OnInit, signal, computed } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { CatalogService } from '../../core/services/catalog.service';
+import {
+  CatalogService,
+  VendorSummary,
+  VendorCategory,
+} from '../../core/services/catalog.service';
 import { CatalogItem, Shop, CatalogCategory, CustomItemRequest } from '../../core/models/catalog.model';
 import { firstValueFrom } from 'rxjs';
 
 import { WebScannerComponent } from '../../shared/components/web-scanner.component';
+
+interface VisibleCategory {
+  value: string;
+  label: string;
+  count?: number;
+}
 
 @Component({
   selector: 'app-catalog-browser',
@@ -33,42 +43,59 @@ import { WebScannerComponent } from '../../shared/components/web-scanner.compone
         </button>
       </div>
 
-      <!-- Shop Chips (horizontal scroll) -->
-      <div class="shop-strip">
+      <!-- Source tab bar: Internal + real vendor catalogs -->
+      <div class="source-tabs">
         <button
-          class="shop-chip"
-          [class.shop-chip--active]="activeShop() === ''"
-          (click)="activeShop.set(''); loadItems()"
-        >All Shops</button>
-        @for (shop of shops(); track shop.id) {
+          class="src-tab"
+          [class.src-tab--active]="activeSource() === ''"
+          (click)="switchSource('')"
+        >
+          <span class="src-emoji">📚</span>
+          <span class="src-name">Internal Catalog</span>
+        </button>
+        @for (v of vendors(); track v.domain) {
           <button
-            class="shop-chip"
-            [class.shop-chip--active]="activeShop() === shop.id"
-            (click)="activeShop.set(shop.id); loadShopItems(shop.id)"
+            class="src-tab"
+            [class.src-tab--active]="activeSource() === v.domain"
+            [class.src-tab--error]="v.error && v.item_count === 0"
+            (click)="switchSource(v.domain)"
+            [title]="v.error || ''"
           >
-            <span class="shop-emoji">{{ shop.logo_emoji }}</span>
-            {{ shop.name }}
+            <span class="src-emoji">{{ v.logo_emoji }}</span>
+            <span class="src-name">{{ v.name }}</span>
+            @if (v.item_count > 0) {
+              <span class="src-count">{{ v.item_count }}</span>
+            } @else if (v.error) {
+              <span class="src-count src-count--err">!</span>
+            }
           </button>
         }
       </div>
 
+      <!-- Internal shop chips (only when Internal tab is active) -->
+      @if (!activeSource()) {
+        <div class="shop-strip">
+          <button
+            class="shop-chip"
+            [class.shop-chip--active]="activeShop() === ''"
+            (click)="activeShop.set(''); loadItems()"
+          >All Shops</button>
+          @for (shop of shops(); track shop.id) {
+            <button
+              class="shop-chip"
+              [class.shop-chip--active]="activeShop() === shop.id"
+              (click)="activeShop.set(shop.id); loadShopItems(shop.id)"
+            >
+              <span class="shop-emoji">{{ shop.logo_emoji }}</span>
+              {{ shop.name }}
+            </button>
+          }
+        </div>
+      }
+
       <!-- Search + Category Tabs -->
       <div class="filter-bar">
         <div class="search-group">
-          <div class="domain-select-wrap">
-            <select [ngModel]="activeExternalDomain()" (ngModelChange)="activeExternalDomain.set($event)" (change)="onDomainChange()">
-              <option value="">Internal Catalog</option>
-              <optgroup label="Live Web Scrapers">
-                @for (domain of externalDomains; track domain.value) {
-                  <option [value]="domain.value">{{ domain.label }}</option>
-                }
-              </optgroup>
-            </select>
-            <svg class="select-arrow" width="10" height="6" viewBox="0 0 10 6" fill="none">
-              <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </div>
-          
           <div class="search-wrap">
             <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none">
               <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.75"/>
@@ -78,19 +105,12 @@ import { WebScannerComponent } from '../../shared/components/web-scanner.compone
               type="text"
               [(ngModel)]="searchQuery"
               (input)="onSearchInput()"
-              (keyup.enter)="triggerSearch()"
-              [placeholder]="activeExternalDomain() ? 'Type a product name and press Enter...' : 'Search items...'"
+              [placeholder]="searchPlaceholder()"
             />
             @if (searchQuery) {
               <button class="search-clear" (click)="clearSearch()">×</button>
             }
           </div>
-          
-          @if (activeExternalDomain()) {
-            <button class="btn btn-primary search-action-btn" (click)="triggerSearch()">
-              Search
-            </button>
-          }
         </div>
 
         <div class="category-tabs">
@@ -99,15 +119,31 @@ import { WebScannerComponent } from '../../shared/components/web-scanner.compone
             [class.cat-tab--active]="activeCategory() === ''"
             (click)="activeCategory.set(''); loadItems()"
           >All</button>
-          @for (cat of categories; track cat) {
+          @for (cat of visibleCategories(); track cat.value) {
             <button
               class="cat-tab"
               [class.cat-tab--active]="activeCategory() === cat.value"
               (click)="activeCategory.set(cat.value); loadItems()"
-            >{{ cat.label }}</button>
+            >
+              {{ cat.label }}
+              @if (cat.count !== undefined) {
+                <span class="cat-count">{{ cat.count }}</span>
+              }
+            </button>
           }
         </div>
       </div>
+
+      @if (activeSource() && activeVendorError()) {
+        <div class="vendor-notice">
+          <div class="vn-text">
+            Indexing issue: {{ activeVendorError() }}
+          </div>
+          <button class="btn btn-secondary btn-sm" (click)="reindexActive()">
+            Retry indexing
+          </button>
+        </div>
+      }
 
       <!-- Loading -->
       @if (loading()) {
@@ -119,8 +155,10 @@ import { WebScannerComponent } from '../../shared/components/web-scanner.compone
         <div class="state-center">
           <div style="font-size:32px; margin-bottom:10px">🔍</div>
           <p style="color:#5f6368; margin:0">No items found.</p>
-          @if (activeExternalDomain()) {
-            <p style="color:#9aa0a6; font-size:12px; margin-top:6px;">Try a different search term. We scan DuckDuckGo live to aggregate these domain results.</p>
+          @if (activeSource()) {
+            <p style="color:#9aa0a6; font-size:12px; margin-top:6px;">
+              Browsing {{ activeVendorName() }} locally — try a different category or clear the search.
+            </p>
           }
         </div>
       }
@@ -139,7 +177,7 @@ import { WebScannerComponent } from '../../shared/components/web-scanner.compone
                   </div>
                 }
                 
-                @if (item.tags?.includes('external')) {
+                @if (item.tags?.includes('indexed')) {
                   <div class="item-card__overlay">
                     <button class="btn btn-primary btn-sm" style="width:100%; box-shadow:0 4px 12px rgba(0,0,0,0.15);" (click)="addExternalItem(item)">
                       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" style="margin-right:6px;">
@@ -149,7 +187,7 @@ import { WebScannerComponent } from '../../shared/components/web-scanner.compone
                     </button>
                   </div>
                   <div style="position: absolute; top:8px; right:8px; background:rgba(0,0,0,0.6); color:#fff; padding:2px 8px; border-radius:12px; font-size:10px; font-weight:600; backdrop-filter:blur(2px);">
-                    Live Store Map
+                    {{ activeVendorName() }}
                   </div>
                 }
                 
@@ -335,6 +373,85 @@ import { WebScannerComponent } from '../../shared/components/web-scanner.compone
     }
     .shop-emoji { font-size: 16px; }
 
+    /* ── Source tab bar (Internal + vendors) ── */
+    .source-tabs {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      padding: 4px 2px 12px;
+      margin-bottom: 8px;
+      scrollbar-width: thin;
+      &::-webkit-scrollbar { height: 6px; }
+      &::-webkit-scrollbar-thumb { background: #dadce0; border-radius: 3px; }
+    }
+    .src-tab {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border: 1.5px solid #e8eaed;
+      border-radius: 12px;
+      background: #fff;
+      font-size: 13px;
+      font-weight: 600;
+      color: #3c4043;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all .15s;
+      .src-emoji { font-size: 18px; }
+      .src-count {
+        font-size: 10px;
+        font-weight: 700;
+        color: #5f6368;
+        background: #f1f3f4;
+        padding: 2px 7px;
+        border-radius: 10px;
+      }
+      .src-count--err { color: #b3261e; background: #fce8e6; }
+      &--active {
+        border-color: #1a73e8;
+        background: #e8f0fe;
+        color: #1a73e8;
+        .src-count { color: #1a73e8; background: #d2e3fc; }
+      }
+      &--error:not(.src-tab--active) {
+        border-color: #f3c7c2;
+        background: #fdf4f3;
+      }
+      &:hover:not(.src-tab--active) {
+        border-color: #bdc1c6;
+      }
+    }
+
+    /* ── Vendor notice ── */
+    .vendor-notice {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 14px;
+      margin-bottom: 16px;
+      background: #fff4e5;
+      border: 1px solid #f9c38a;
+      border-radius: 10px;
+      .vn-text {
+        font-size: 12px;
+        color: #5f4a1f;
+      }
+    }
+
+    .cat-count {
+      display: inline-block;
+      margin-left: 6px;
+      padding: 1px 6px;
+      background: rgba(0, 0, 0, 0.06);
+      border-radius: 8px;
+      font-size: 9px;
+      font-weight: 700;
+      color: inherit;
+      opacity: 0.8;
+    }
+
     /* ── Filter Bar ── */
     .filter-bar {
       display: flex;
@@ -361,38 +478,6 @@ import { WebScannerComponent } from '../../shared/components/web-scanner.compone
       }
     }
     
-    .domain-select-wrap {
-      position: relative;
-      border-right: 1px solid #e8eaed;
-      background: #f8f9fa;
-      height: 42px;
-      display: flex;
-      align-items: center;
-      transition: background 0.15s;
-      &:hover { background: #f1f3f4; }
-      select {
-        border: none;
-        background: transparent;
-        padding: 0 36px 0 16px;
-        height: 100%;
-        font-family: inherit;
-        font-size: 13px;
-        font-weight: 500;
-        color: #3c4043;
-        cursor: pointer;
-        outline: none;
-        appearance: none;
-      }
-      .select-arrow {
-        position: absolute;
-        right: 14px;
-        top: 50%;
-        transform: translateY(-50%);
-        pointer-events: none;
-        color: #5f6368;
-      }
-    }
-
     .search-wrap {
       position: relative;
       flex: 1;
@@ -695,7 +780,7 @@ import { WebScannerComponent } from '../../shared/components/web-scanner.compone
       .items-grid { grid-template-columns: repeat(2, 1fr); }
       .shop-strip { gap: 6px; }
       .shop-chip { padding: 6px 12px; font-size: 12px; }
-      .domain-select-wrap select { padding: 0 28px 0 10px; font-size: 12px; }
+      .src-tab { padding: 8px 12px; font-size: 12px; }
     }
   `,
 })
@@ -706,16 +791,33 @@ export class CatalogBrowserComponent implements OnInit {
   activeShop = signal('');
   activeCategory = signal('');
   searchQuery = '';
-  
-  activeExternalDomain = signal('');
-  externalDomains = [
-    { label: 'Hatil', value: 'hatil.com' },
-    { label: 'Akij Ceramics', value: 'akijceramics.com' },
-    { label: 'RAK Ceramics', value: 'rakceramics.com' },
-    { label: 'IKEA', value: 'ikea.com' },
-    { label: 'Ashley Furniture', value: 'ashleyfurniture.com' },
-    { label: 'CB2', value: 'cb2.com' },
-  ];
+
+  // Real vendors from /api/vendors (sitemap-indexed)
+  vendors = signal<VendorSummary[]>([]);
+  activeSource = signal(''); // '' = internal catalog, else vendor domain
+  vendorCategoryMap = signal<Record<string, VendorCategory[]>>({});
+
+  activeVendor = computed<VendorSummary | null>(() => {
+    const src = this.activeSource();
+    if (!src) return null;
+    return this.vendors().find(v => v.domain === src) ?? null;
+  });
+  activeVendorName = computed(() => this.activeVendor()?.name ?? '');
+  activeVendorError = computed(() => this.activeVendor()?.error ?? null);
+
+  searchPlaceholder = computed(() => {
+    const v = this.activeVendor();
+    return v ? `Search ${v.name} (${v.item_count} items)...` : 'Search items...';
+  });
+
+  visibleCategories = computed<VisibleCategory[]>(() => {
+    const src = this.activeSource();
+    if (src) {
+      const cats = this.vendorCategoryMap()[src] ?? [];
+      return cats.map(c => ({ value: c.value, label: c.label, count: c.count }));
+    }
+    return this.categories.map(c => ({ value: c.value, label: c.label }));
+  });
 
   showUpload = signal(false);
   uploading = signal(false);
@@ -736,12 +838,53 @@ export class CatalogBrowserComponent implements OnInit {
   ];
 
   private shopMap = new Map<string, string>();
+  private searchDebounceId: ReturnType<typeof setTimeout> | null = null;
 
   constructor(private catalogService: CatalogService, private router: Router) {}
 
   ngOnInit() {
     this.loadShops();
+    this.loadVendors();
     this.loadItems();
+  }
+
+  async loadVendors() {
+    try {
+      const v = await firstValueFrom(this.catalogService.listVendors());
+      this.vendors.set(v);
+    } catch (e) {
+      console.error('Failed to load vendors', e);
+    }
+  }
+
+  switchSource(domain: string) {
+    this.activeSource.set(domain);
+    this.activeCategory.set('');
+    this.activeShop.set('');
+    if (domain && !this.vendorCategoryMap()[domain]) {
+      this.loadVendorCategories(domain);
+    }
+    this.loadItems();
+  }
+
+  async loadVendorCategories(domain: string) {
+    try {
+      const cats = await firstValueFrom(this.catalogService.getVendorCategories(domain));
+      this.vendorCategoryMap.update(m => ({ ...m, [domain]: cats }));
+    } catch (e) {
+      console.error('Failed to load vendor categories', e);
+    }
+  }
+
+  async reindexActive() {
+    const domain = this.activeSource();
+    if (!domain) return;
+    try {
+      await firstValueFrom(this.catalogService.reindexVendor(domain));
+      alert(`Re-indexing ${domain} in the background. Refresh in a moment to see updated results.`);
+    } catch (e) {
+      alert('Failed to trigger reindex');
+    }
   }
 
   async loadShops() {
@@ -752,74 +895,49 @@ export class CatalogBrowserComponent implements OnInit {
     this.shopMap.set('my_collection', 'My Collection');
   }
 
-  async triggerSearch() {
-    if (this.activeExternalDomain()) {
-      if (this.searchQuery.trim()) {
-        await this.loadExternalItems();
-      }
-    } else {
-      await this.loadItems();
-    }
-  }
-  
   onSearchInput() {
-    // Only auto-search while typing if we are on the Internal Catalog.
-    // External proxy searches should only occur explicitly on Enter/Click to avoid spam.
-    if (!this.activeExternalDomain()) {
-      this.loadItems();
-    }
-  }
-  
-  clearSearch() {
-    this.searchQuery = '';
-    this.triggerSearch();
-  }
-  
-  onDomainChange() {
-    // When switching domains, if moving to internal, instantly reload.
-    // If moving to external, wait for explicit query.
-    if (!this.activeExternalDomain()) {
-      this.loadItems();
-    } else {
-      this.items.set([]);
-    }
+    if (this.searchDebounceId) clearTimeout(this.searchDebounceId);
+    this.searchDebounceId = setTimeout(() => this.loadItems(), 220);
   }
 
-  async loadExternalItems() {
-    this.loading.set(true);
-    try {
-      const items = await firstValueFrom(
-        this.catalogService.searchExternalItems(this.activeExternalDomain(), this.searchQuery)
-      );
-      this.items.set(items);
-    } catch (e) {
-      console.error('Failed external search', e);
-      this.items.set([]);
-    } finally {
-      this.loading.set(false);
-    }
+  clearSearch() {
+    this.searchQuery = '';
+    this.loadItems();
   }
 
   async loadItems() {
-    if (this.activeExternalDomain()) {
-      if (!this.searchQuery.trim()) {
-        this.items.set([]); // External proxy requires a search term
-        return;
+    const src = this.activeSource();
+    if (src) {
+      this.loading.set(true);
+      try {
+        const res = await firstValueFrom(
+          this.catalogService.browseVendor(src, {
+            q: this.searchQuery.trim() || undefined,
+            category: this.activeCategory() || undefined,
+            page: 1,
+            limit: 60,
+          })
+        );
+        const tagged = res.items.map(it => ({
+          ...it,
+          tags: Array.from(new Set([...(it.tags ?? []), 'indexed'])),
+        }));
+        this.items.set(tagged);
+      } catch (e) {
+        console.error('Failed to browse vendor', e);
+        this.items.set([]);
+      } finally {
+        this.loading.set(false);
       }
-      return this.triggerSearch();
+      return;
     }
 
     this.loading.set(true);
     const items = await firstValueFrom(
       this.catalogService.searchItems(this.searchQuery, this.activeCategory())
     );
-    // Filter by shop if selected
     const shop = this.activeShop();
-    if (shop) {
-      this.items.set(items.filter(i => i.shop_id === shop));
-    } else {
-      this.items.set(items);
-    }
+    this.items.set(shop ? items.filter(i => i.shop_id === shop) : items);
     this.loading.set(false);
   }
 
@@ -845,23 +963,27 @@ export class CatalogBrowserComponent implements OnInit {
   }
 
   async addExternalItem(item: CatalogItem) {
+    const category: CatalogCategory =
+      (item.category as CatalogCategory) || 'furniture';
+    const tags = Array.from(
+      new Set(['external', ...(item.tags || [])])
+    ).filter(t => t !== 'indexed');
     const req: CustomItemRequest = {
       name: item.name,
       description: item.description,
-      category: 'furniture',
+      category,
       image_base64: item.image_base64,
-      tags: ['external', item.shop_id],
+      tags,
     };
     try {
       await firstValueFrom(this.catalogService.createCustomItem(req));
       alert(`Successfully saved ${item.name} to My Collection!`);
-      // Optionally switch back to internal view to show it
-      this.activeExternalDomain.set('');
+      this.activeSource.set('');
       this.searchQuery = '';
       this.activeShop.set('my_collection');
       this.loadItems();
-    } catch (e) {
-      alert('Failed to save external item.');
+    } catch {
+      alert('Failed to save item.');
     }
   }
 

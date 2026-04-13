@@ -50,24 +50,43 @@ class OpenRouterClient:
     async def generate_image(
         self, model: str, prompt: str,
         reference_images: list[str] | None = None,
+        blueprint_image: str | None = None,
     ) -> str:
         """Generate an image from a text prompt, optionally with reference images.
-        
-        reference_images: list of base64 data URLs (data:image/...;base64,...)
+
+        blueprint_image: if provided, it is placed FIRST with an explicit anchor
+        instruction so the model treats it as the spatial layout to follow.
+        reference_images: remaining reference images (catalog items, etc.)
         """
-        # Build multimodal content if reference images exist
+        content_parts: list[dict] = []
+
+        # Blueprint goes first with an explicit instruction label
+        if blueprint_image and (
+            blueprint_image.startswith("data:image") or blueprint_image.startswith("http")
+        ):
+            content_parts.append({
+                "type": "text",
+                "text": "FLOOR PLAN BLUEPRINT — USE THIS SCHEMATIC AS THE EXACT SPATIAL LAYOUT. "
+                        "Every element's position in this top-down diagram defines where it MUST appear in the 3D render:",
+            })
+            content_parts.append({
+                "type": "image_url",
+                "image_url": {"url": blueprint_image},
+            })
+
+        # Main generation prompt
+        content_parts.append({"type": "text", "text": prompt})
+
+        # Remaining reference images (catalog items, user uploads)
         if reference_images:
-            content_parts: list[dict] = []
-            content_parts.append({"type": "text", "text": prompt})
             for img_url in reference_images:
                 if img_url and (img_url.startswith("data:image") or img_url.startswith("http")):
                     content_parts.append({
                         "type": "image_url",
                         "image_url": {"url": img_url},
                     })
-            messages = [{"role": "user", "content": content_parts}]
-        else:
-            messages = [{"role": "user", "content": prompt}]
+
+        messages = [{"role": "user", "content": content_parts if content_parts else prompt}]
 
         response = await self.client.post(
             "/chat/completions",
