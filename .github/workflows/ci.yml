@@ -30,6 +30,7 @@ jobs:
       - name: Run backend smoke checks
         working-directory: backend
         run: |
+          cp .env.example .env
           python -m compileall src
           python -c "import src.main"
 
