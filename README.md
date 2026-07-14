@@ -1,5 +1,12 @@
 # Architect
 
+## Project Description
+Architect is an AI-powered home interior design application. It consists of an Angular frontend and a FastAPI backend.
+
+## Project Status
+**Active Development** - Version 0.1.0
+
+## CI/CD Pipeline
 CI/CD is configured with GitHub Actions for this monorepo:
 
 - CI on pull requests and pushes to `main` for:
@@ -8,13 +15,15 @@ CI/CD is configured with GitHub Actions for this monorepo:
 - CD for frontend to GitHub Pages.
 - Optional backend CD through a deploy hook secret.
 
-## Workflows
+### Workflows
 
 - `.github/workflows/ci.yml`
 - `.github/workflows/deploy-pages.yml`
 - `.github/workflows/deploy-backend-hook.yml`
 
-## Frontend Deployment (GitHub Pages)
+## Release / Deployment
+
+### Frontend Deployment (GitHub Pages)
 
 1. In GitHub, go to repository settings.
 2. Open `Settings -> Pages`.
@@ -25,7 +34,7 @@ The frontend deploy URL will be:
 
 - `https://mubinui.github.io/Architect/`
 
-## Optional Backend Deployment (Free Tier Hosts)
+### Optional Backend Deployment (Free Tier Hosts)
 
 Use a host that supports deploy hooks (for example Render, Railway, or similar plans available to you).
 
